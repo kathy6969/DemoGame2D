@@ -17,6 +17,7 @@ public class HealthSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
     public void DamageTake(float damage)
     {
