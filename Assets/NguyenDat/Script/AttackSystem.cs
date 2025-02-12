@@ -21,7 +21,7 @@ public class AttackSystem : MonoBehaviour
         HealthSystem targetHealth = collision.GetComponent<HealthSystem>();
         if (targetHealth != null)
         {
-            targetHealth.DamageTake(Damage);
+            targetHealth.DamageTake(-Damage);
         }
     }
 }
