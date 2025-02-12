@@ -4,10 +4,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;         // Tốc độ chạy
     public float jumpForce = 7f;     // Lực nhảy
+    public Transform groundCheck;    // Vị trí kiểm tra mặt đất
+    public LayerMask groundLayer;    // Layer của mặt đất
     private Rigidbody2D rb;          // RigidBody của nhân vật
     private Animator animator;       // Animator để điều khiển animation
-    private bool isGrounded = true;  // Kiểm tra xem nhân vật có đang trên mặt đất không
+    private bool isGrounded;         // Kiểm tra xem nhân vật có đang trên mặt đất không
     private bool facingRight = true; // Kiểm tra hướng nhân vật
+    private float groundCheckRadius = 0.2f; // Bán kính kiểm tra mặt đất
 
     void Start()
     {
@@ -19,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
+        CheckGround();
     }
 
     private void HandleMovement()
@@ -49,17 +53,13 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vận tốc Y trước khi nhảy
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("isJumping", true);
-            isGrounded = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void CheckGround()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            animator.SetBool("isJumping", false);
-        }
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        animator.SetBool("isJumping", !isGrounded);
     }
 
     void Flip()
@@ -68,5 +68,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Dame"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
