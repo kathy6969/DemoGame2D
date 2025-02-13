@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9041533561167811548}
   - component: {fileID: 399671617171093418}
   - component: {fileID: 5932452884447627026}
-  - component: {fileID: 3296565516279344110}
   m_Layer: 5
   m_Name: Healbar
   m_TagString: Untagged
@@ -104,18 +103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 399671617171093418}
---- !u!114 &3296565516279344110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077538754291012487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0358715f73c8e9e449066d049a9850d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5540221810203141589
 GameObject:
   m_ObjectHideFlags: 0

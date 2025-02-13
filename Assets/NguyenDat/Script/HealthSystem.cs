@@ -1,33 +1,46 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float MaxHeal , TotalHeal;
+    public float MaxHealth, TotalHealth;
     [SerializeField] FloatingHealbar Healbar;
-    // Start is called before the first frame update
+
+    public float invincibleTime = 1.5f; // Thời gian bất tử sau khi nhận sát thương
+    private bool isInvincible = false;  // Trạng thái bất tử
+
     void Start()
     {
         Healbar = GetComponentInChildren<FloatingHealbar>();
-        TotalHeal = MaxHeal;
-        Healbar.UpdateHealbar(TotalHeal, MaxHeal);
+        TotalHealth = MaxHealth;
+        Healbar.UpdateHealbar(TotalHealth, MaxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void DamageTake(float damage)
     {
-        TotalHeal -= damage;
-        Healbar.UpdateHealbar(TotalHeal,MaxHeal);
-        if (TotalHeal < 0)
+        if (isInvincible) return; // Nếu đang bất tử thì bỏ qua sát thương
+
+        TotalHealth -= damage;
+        Healbar.UpdateHealbar(TotalHealth, MaxHealth);
+
+        if (TotalHealth <= 0)
         {
             Die();
         }
+        else
+        {
+            StartCoroutine(BecomeInvincible()); // Kích hoạt bất tử tạm thời
+        }
     }
+
+    private IEnumerator BecomeInvincible()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibleTime); // Chờ hết thời gian bất tử
+        isInvincible = false;
+    }
+
     public void Die()
     {
         Destroy(gameObject);
