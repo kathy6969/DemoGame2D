@@ -5,23 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Dame
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-<<<<<<< HEAD
-  - Skeleton
-  - Ground
-  - Player
-  >>>>>>> test
-=======
-
-  - Ground
-  - Player
->>>>>>> test
+  - 
+  - 
   - 
   - 
   - 

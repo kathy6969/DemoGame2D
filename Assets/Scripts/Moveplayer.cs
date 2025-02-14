@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class MovePlayer : MonoBehaviour
 {
     public float speed = 5f;         // Tốc độ chạy
     public float jumpForce = 7f;     // Lực nhảy
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+       rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
