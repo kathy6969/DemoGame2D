@@ -9,6 +9,7 @@ public class MageAttack : MonoBehaviour
 
     private Transform playerTransform;
     public Animator animator;
+    public float DistanceAttack;
 
     void Start()
     {
@@ -38,6 +39,10 @@ public class MageAttack : MonoBehaviour
     public void BeingAttack()
     {
         animator.SetBool("atk",true);
+    }
+    public void StopAttack()
+    {
+        animator.SetBool("atk", false);
     }
 
     public void Attack()

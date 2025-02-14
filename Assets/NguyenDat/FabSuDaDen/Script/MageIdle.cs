@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class MageIdle : MonoBehaviour
 {
-    private float idleTime = 2f;
-    private float timer;
     public float detectionRadius;
     public LayerMask playerLayer;
+    public float idleFlipInterval = 2f; // Thời gian giữa mỗi lần tự động lật hướng
 
     private Transform playerTransform;
-    private MageAttack mageAttack; // Tham chiếu đến script MageAttack
+    private MageAttack mageAttack;
+    private float flipTimer;
+    private bool facingRight = true;
+    public bool isIdleFlipping = true; // Biến kiểm soát lật hướng
 
     void Start()
     {
-        timer = idleTime;
-        mageAttack = GetComponent<MageAttack>(); // Lấy MageAttack từ cùng GameObject
+        mageAttack = GetComponent<MageAttack>();
+        flipTimer = idleFlipInterval;
     }
 
     void Update()
     {
         DetectPlayer();
+        if (isIdleFlipping)
+        {
+            HandleIdleFlip();
+        }
     }
 
     private void DetectPlayer()
@@ -29,14 +35,36 @@ public class MageIdle : MonoBehaviour
 
         if (player != null)
         {
-            if (playerTransform == null)
-            {
                 playerTransform = player.transform;
-                mageAttack.SetTarget(playerTransform); // Gửi thông tin người chơi cho MageAttack
-                mageAttack.BeingAttack(); // Bắt đầu tấn công
+                mageAttack.SetTarget(playerTransform);
+                mageAttack.BeingAttack();
+                isIdleFlipping = false; // Dừng tự động lật hướng khi phát hiện Player
                 Debug.Log("Pháp sư đã phát hiện người chơi và bắt đầu tấn công!");
-            }
+            
         }
+        else
+        {
+                playerTransform = null;
+                mageAttack.StopAttack();
+                isIdleFlipping = true; // Cho phép tự động lật hướng khi Player rời đi
+                Debug.Log("Pháp sư đã ngừng tấn công, quay lại trạng thái Idle!");
+        }
+    }
+
+    private void HandleIdleFlip()
+    {
+        flipTimer -= Time.deltaTime;
+        if (flipTimer <= 0)
+        {
+            Flip();
+            flipTimer = idleFlipInterval;
+        }
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void OnDrawGizmos()
