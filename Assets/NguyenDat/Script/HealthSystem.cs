@@ -9,12 +9,14 @@ public class HealthSystem : MonoBehaviour
 
     public float invincibleTime = 1.5f; // Thời gian bất tử sau khi nhận sát thương
     private bool isInvincible = false;  // Trạng thái bất tử
+    private DebuffSystem debuffSystem;
 
     void Start()
     {
         Healbar = GetComponentInChildren<FloatingHealbar>();
         TotalHealth = MaxHealth;
         Healbar.UpdateHealbar(TotalHealth, MaxHealth);
+        debuffSystem = GetComponent<DebuffSystem>();
     }
 
     public void DamageTake(float damage)
@@ -44,5 +46,13 @@ public class HealthSystem : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+    // 📌 Thêm hàm này để Fireball có thể gọi
+    public void ApplyBurn(float burnPercentage, float duration)
+    {
+        if (debuffSystem != null)
+        {
+            debuffSystem.ApplyBurn(burnPercentage, duration);
+        }
     }
 }

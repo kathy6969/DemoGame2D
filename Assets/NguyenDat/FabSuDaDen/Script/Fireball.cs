@@ -8,10 +8,15 @@ public class Fireball : MonoBehaviour
     public int damage = 10;
     public float lifetime = 5f; // Tự hủy sau 5 giây
     private Transform target; // Người chơi
+    private AttackSystem attackSystem;
+    public float burnPercentage; // % máu tối đa mất mỗi giây
+    public float burnDuration; // Thời gian bị đốt
 
     void Start()
     {
         Destroy(gameObject, lifetime); // Xóa cầu lửa sau thời gian tồn tại
+        attackSystem = GetComponent<AttackSystem>();
+        attackSystem.Damage = damage;
     }
 
     void Update()
@@ -37,6 +42,8 @@ public class Fireball : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            HealthSystem playerHealth = other.GetComponent<HealthSystem>();
+            playerHealth.ApplyBurn(burnPercentage, burnDuration);
             //Debug.Log("Cầu lửa trúng người chơi!");
             Destroy(gameObject);
         }

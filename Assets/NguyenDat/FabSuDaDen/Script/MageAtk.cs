@@ -9,7 +9,6 @@ public class MageAttack : MonoBehaviour
 
     private Transform playerTransform;
     public Animator animator;
-    public float DistanceAttack;
 
     void Start()
     {
