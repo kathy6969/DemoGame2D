@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Dame
   - Ground
+  - Coin
+  - Invincible
   layers:
   - Default
   - TransparentFX

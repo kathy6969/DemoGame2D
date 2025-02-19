@@ -36,10 +36,6 @@ public class DashManager : MonoBehaviour
             dashSlider.value = 0;
             StartCoroutine(FillSliderCoroutine());
         }
-        else
-        {
-            Debug.LogError("Dash Slider chưa được gán trong Inspector!");
-        }
     }
 
     private IEnumerator FillSliderCoroutine()
@@ -56,7 +52,6 @@ public class DashManager : MonoBehaviour
         dashSlider.value = 1;
         // Khi slider đầy, đặt canDash = true và không reset slider
         canDash = true;
-        Debug.Log("Slider is full, canDash = true");
     }
 
     // Nếu sau khi dash được kích hoạt bạn muốn reset slider,

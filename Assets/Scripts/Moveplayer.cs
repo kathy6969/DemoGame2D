@@ -35,6 +35,7 @@ public class MovePlayer : MonoBehaviour
         {
             canDash = false;
         }
+
         if (!isDashing)
         {
             HandleMovement();
@@ -89,6 +90,7 @@ public class MovePlayer : MonoBehaviour
         float dashDirection = facingRight ? 1f : -1f;
         rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(dashDirection * dashForce, 0), ForceMode2D.Impulse);
+
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
     }
@@ -106,13 +108,5 @@ public class MovePlayer : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Dame"))
-        {
-            Destroy(gameObject);
-        }
     }
 }
