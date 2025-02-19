@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
+  - Enemy
   - Dame
+  - Ground
   layers:
   - Default
   - TransparentFX

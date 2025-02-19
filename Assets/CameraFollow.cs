@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, -10); // Khoảng cách camera
     public float smoothSpeed = 0.125f; // Tốc độ mượt (nếu cần)
 
-    void LateUpdate()
+    void Update()
     {
         if (player != null)
         {

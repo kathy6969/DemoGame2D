@@ -5,30 +5,36 @@ using UnityEngine;
 public class HealthBarFollow : MonoBehaviour
 {
     public Transform player; // Kéo thả Player vào đây
-    public Vector3 offset = new Vector3(0, 0f, 0); // Điều chỉnh vị trí thanh máu
+    public Vector3 offset = new Vector3(0, 2f, 0); // Điều chỉnh vị trí thanh máu
     private RectTransform rectTransform;
-    private Quaternion initialRotation;
+    public float smoothSpeed = 0.125f; // Tốc độ mượt (có thể điều chỉnh)
 
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
-        initialRotation = transform.rotation; // Lưu góc quay ban đầu
+        rectTransform = GetComponent<RectTransform>();  // Lấy RectTransform của Canvas
     }
 
     void Update() // Đồng bộ với Cinemachine
     {
         if (player != null)
         {
-            // Nếu dùng UI Screen Space - Camera hoặc Overlay
+            // Nếu Canvas ở chế độ UI Screen Space (Overlay hoặc Camera)
             if (rectTransform != null)
             {
-                Vector3 screenPos = Camera.main.WorldToScreenPoint(player.position + offset);
-                rectTransform.position = screenPos;
+                // Chuyển vị trí player từ world space sang screen space
+                Vector3 targetPosition = Camera.main.WorldToScreenPoint(player.position + offset);
+
+                // Di chuyển mượt mà đến vị trí mục tiêu
+                rectTransform.position = Vector3.Lerp(rectTransform.position, targetPosition, smoothSpeed);
             }
-            else // Nếu dùng World Space
+            // Nếu Canvas ở chế độ World Space
+            else
             {
+                // Cập nhật vị trí của Canvas theo player với offset
                 transform.position = player.position + offset;
-                transform.rotation = initialRotation; // Giữ nguyên góc quay
+
+                // Giữ rotation cố định (không xoay)
+                transform.rotation = Quaternion.identity; // Không thay đổi góc quay
             }
         }
     }
