@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Platform
   - Ground
+  - Item
+  - Hp+
   layers:
   - Default
   - TransparentFX
@@ -16,9 +18,9 @@ TagManager:
   - UI
   - Ground
   - Player
-  - 
-  - 
-  - 
+  - item
+  - hp
+  - platform
   - 
   - 
   - 
