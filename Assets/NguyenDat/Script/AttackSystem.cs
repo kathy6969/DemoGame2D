@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackSystem : MonoBehaviour
 {
-    public int Damage;
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +15,10 @@ public class AttackSystem : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SetDamage(float ATKDAME)
+    {
+        damage = ATKDAME;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,12 +31,12 @@ public class AttackSystem : MonoBehaviour
             // Nếu object này có tag là "Enemy", nó chỉ gây damage cho Player
             if (gameObject.CompareTag("Enemy") && collision.CompareTag("Player"))
             {
-                targetHealth.DamageTake(Damage);
+                targetHealth.DamageTake(damage);
             }
             // Nếu object này có tag khác "Enemy" (ví dụ như "Player"), nó chỉ gây damage cho Enemy
             else if (!gameObject.CompareTag("Enemy") && collision.CompareTag("Enemy"))
             {
-                targetHealth.DamageTake(Damage);
+                targetHealth.DamageTake(damage);
             }
         }
     }

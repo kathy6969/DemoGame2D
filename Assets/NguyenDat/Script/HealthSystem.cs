@@ -8,7 +8,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] FloatingHealbar Healbar;
 
     public float invincibleTime = 1.5f; // Thời gian bất tử sau khi nhận sát thương
-    private bool isInvincible = false;  // Trạng thái bất tử
+    public bool isInvincible = false;  // Trạng thái bất tử
     private DebuffSystem debuffSystem;
 
     void Start()

@@ -16,7 +16,7 @@ public class Fireball : MonoBehaviour
     {
         Destroy(gameObject, lifetime); // Xóa cầu lửa sau thời gian tồn tại
         attackSystem = GetComponent<AttackSystem>();
-        attackSystem.Damage = damage;
+        attackSystem.damage = damage;
     }
 
     void Update()
