@@ -1,0 +1,16 @@
+using UnityEngine;
+
+public class Attack1 : MonoBehaviour
+{
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void PerformAttack()
+    {
+        animator.SetTrigger("Attack1");
+    }
+}
