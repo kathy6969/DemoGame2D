@@ -8,6 +8,8 @@ public class AttackState : State
     private Transform player;
     private GameObject fireballPrefab;
     private int fireballDamage; // Thêm biến sát thương
+    private AdvFireBall fireballScript;
+    private Transform FirePoint;
     private Animator animator;
     public AttackState(BossStateMachine boss, GameObject fireballPrefab, Transform player, int fireballDamage)
     {
