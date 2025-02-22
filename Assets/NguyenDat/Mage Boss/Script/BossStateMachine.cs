@@ -20,15 +20,13 @@ public class BossStateMachine : MonoBehaviour
     public float fireballSpacing = 2f; // Khoảng cách giữa các cầu lửa
     public float fireballSpawnHeight = 5f; // Chiều cao so với vị trí Boss
     public float fireballFallSpeed = 5f; // Tốc độ rơi
-    public float stateChangeInterval = 3f; // Thời gian đổi trạng thái (3 giây)
-    private float stateChangeTimer;
 
     private void Start()
     {
         teleportState = new TeleportState(this);
         attackState = new AttackState(this, fireballPrefab, player, fireballDamage);
-        stateChangeTimer = stateChangeInterval; // Đặt thời gian ban đầu
-        SetState(teleportState); // Trạng thái ban đầu là dịch chuyển
+        idelState = new IdelState(this);
+        ChangeState(idelState);
     }
 
     private void Update()
@@ -37,41 +35,26 @@ public class BossStateMachine : MonoBehaviour
         {
             currentState.UpdateState(); // Gọi liên tục để cập nhật trạng thái
         }
-        // Đếm thời gian để đổi trạng thái
-        float distance = Vector2.Distance(transform.position, player.position);
-        if (distance < attackRange)
+        if (player != null && Vector2.Distance(transform.position, player.position) < 5f)
         {
-            Debug.Log("Boss ở gần người chơi, chuyển trạng thái");
-            stateChangeTimer -= Time.deltaTime;
-            if (stateChangeTimer <= 0)
-            {
-                ChangeState();
-                stateChangeTimer = stateChangeInterval; // Reset bộ đếm
-            }
+            ChangeState(attackState); // Chuyển sang trạng thái tấn công khi gần người chơi
+        }
+        else
+        {
+            ChangeState(teleportState); // Quay lại trạng thái dịch chuyển khi xa
         }
     }
-    void ChangeState()
-    {
-        int randomState = Random.Range(0, 1); // Chọn 1 trong 3 trạng thái
-
-        switch (randomState)
-        {
-            case 0:
-                SetState(new TeleportState(this)); // Dịch chuyển
-                break;
-            case 1:
-                SetState(new AttackState(this, fireballPrefab, player, 10)); // Tấn công
-                break;
-        }
-    }
-    public void SetState(State newState)
+    void ChangeState(State newState)
     {
         if (currentState != null)
         {
-            currentState.ExitState(); // Thoát trạng thái hiện tại
+            currentState.ExitState();
         }
-        currentState = newState; // Gán trạng thái mới
-        currentState.EnterState(); // Kích hoạt trạng thái mới
+        else
+        {
+            currentState = newState;
+            currentState.EnterState();
+        }
     }
     private void ShootFireball()
     {

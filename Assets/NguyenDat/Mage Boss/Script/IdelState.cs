@@ -6,13 +6,11 @@ public class IdelState : State
 {
     private BossStateMachine boss;
     private Animator animator;
-    private BossStateMachine bossStateMachine;
-
-    public IdelState(BossStateMachine bossStateMachine)
+    public IdelState(BossStateMachine boss)
     {
-        this.bossStateMachine = bossStateMachine;
+        this.boss = boss;
+        animator = boss.GetComponent<Animator>();
     }
-
     public override void EnterState()
     {
         animator.SetBool("Attack1", false);
@@ -20,18 +18,6 @@ public class IdelState : State
     }
 
     public override void ExitState()
-    {
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }

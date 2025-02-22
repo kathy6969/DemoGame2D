@@ -123,7 +123,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.00523901, y: -0.44779968}
@@ -195,7 +195,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.003906727, y: 0.16528375}
@@ -263,6 +263,7 @@ MonoBehaviour:
   TotalHealth: 0
   Healbar: {fileID: 4698274195085798036}
   invincibleTime: 1.5
+  isInvincible: 0
 --- !u!114 &2408629751427586139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +297,6 @@ MonoBehaviour:
   fireballPrefab: {fileID: 5752272265521444703, guid: d26f2ae0f58d5de4eaeca01e325b40ba, type: 3}
   firePoint: {fileID: 507135134336266506}
   animator: {fileID: 8261737926234983667}
-  DistanceAttack: 0
 --- !u!1 &1552678628187615531
 GameObject:
   m_ObjectHideFlags: 0
