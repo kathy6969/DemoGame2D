@@ -21,7 +21,7 @@ public class AttackState : State
     }
     public override void EnterState()
     {
-        Debug.Log("Boss vào trạng thái tấn công!");
+        //Debug.Log("Boss vào trạng thái tấn công!");
         if (Random.value > 0.5f)
         {
             animator.SetBool("Attack1", true);
@@ -37,8 +37,14 @@ public class AttackState : State
     }
     public override void ExitState()
     {
-        animator.SetBool("Attack1", false);
-        animator.SetBool("Attack2", false);
+        if (animator.GetBool("Attack1") == true)
+        {
+            animator.SetBool("Attack1", false);
+        }
+        else if (animator.GetBool("Attack2") == true)
+        {
+            animator.SetBool("Attack2", false);
+        }
     }
     private void FlipTowardsPlayer()
     {
