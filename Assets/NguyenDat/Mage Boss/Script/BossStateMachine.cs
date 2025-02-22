@@ -26,7 +26,7 @@ public class BossStateMachine : MonoBehaviour
         teleportState = new TeleportState(this);
         attackState = new AttackState(this, fireballPrefab, player, fireballDamage);
         idelState = new IdelState(this);
-        ChangeState(idelState);
+        ChangeState(teleportState);
     }
 
     private void Update()
@@ -35,26 +35,32 @@ public class BossStateMachine : MonoBehaviour
         {
             currentState.UpdateState(); // Gọi liên tục để cập nhật trạng thái
         }
-        if (player != null && Vector2.Distance(transform.position, player.position) < 5f)
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        float minDistance = 3f; // Khoảng cách quá gần khiến boss dịch chuyển
+        if (distanceToPlayer > attackRange)
         {
-            ChangeState(attackState); // Chuyển sang trạng thái tấn công khi gần người chơi
+            // Nếu người chơi xa hơn attackRange, dịch chuyển
+            ChangeState(teleportState);
         }
-        else
+        else if (distanceToPlayer <= attackRange && distanceToPlayer > minDistance)
         {
-            ChangeState(teleportState); // Quay lại trạng thái dịch chuyển khi xa
+            // Nếu người chơi trong attackRange nhưng không quá gần, tấn công
+            ChangeState(attackState);
+        }
+        else if (distanceToPlayer <= minDistance)
+        {
+            // Nếu người chơi quá gần, dịch chuyển lại
+            ChangeState(teleportState);
         }
     }
     void ChangeState(State newState)
     {
         if (currentState != null)
         {
-            currentState.ExitState();
+            currentState.ExitState(); // Thoát trạng thái cũ
         }
-        else
-        {
-            currentState = newState;
-            currentState.EnterState();
-        }
+        currentState = newState;
+        currentState.EnterState(); // Vào trạng thái mới
     }
     private void ShootFireball()
     {
