@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FloatingHealbar : MonoBehaviour
 {
-    [SerializeField]private Slider slider;
+    [SerializeField]Slider slider;
     // Start is called before the first frame update
     void Start()
     {
