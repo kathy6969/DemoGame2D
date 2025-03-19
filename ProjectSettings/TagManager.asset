@@ -4,14 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - Item
-  - die
+  - ground
+  - boss
+  - PatrolPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ground
   - Water
   - UI
   - 

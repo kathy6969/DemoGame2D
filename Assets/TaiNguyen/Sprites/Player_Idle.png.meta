@@ -93,19 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -113,10 +100,10 @@ TextureImporter:
       name: Player_Idle_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 4
-        width: 13
-        height: 19
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97d9dae8968a8824bbfa9de7726d89db
-      internalID: 120788764
+      spriteID: 8d0b36733847b5245bcdf19c817295a1
+      internalID: 1994497178
       vertices: []
       indices: 
       edges: []
@@ -134,10 +121,10 @@ TextureImporter:
       name: Player_Idle_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 4
-        width: 13
-        height: 18
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6176e169cca2ab34fa8956fffd15c018
-      internalID: 1412988446
+      spriteID: bb7923615689e5947aa4a72a77a89b3f
+      internalID: -358430970
       vertices: []
       indices: 
       edges: []
@@ -155,10 +142,10 @@ TextureImporter:
       name: Player_Idle_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 4
-        width: 13
-        height: 18
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87a462f002323aa48930f005abf024b8
-      internalID: 759171834
+      spriteID: 6607e61209742bc4eb76679b06fe385f
+      internalID: 679255640
       vertices: []
       indices: 
       edges: []
@@ -176,10 +163,10 @@ TextureImporter:
       name: Player_Idle_3
       rect:
         serializedVersion: 2
-        x: 105
-        y: 4
-        width: 13
-        height: 18
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44aada4eb5244994c993fc27921894c1
-      internalID: -229983782
+      spriteID: 6a4308023bc5d4142a8e2ac98b4a8e63
+      internalID: -1104837529
       vertices: []
       indices: 
       edges: []
@@ -204,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Idle_0: 120788764
-      Player_Idle_1: 1412988446
-      Player_Idle_2: 759171834
-      Player_Idle_3: -229983782
+      Player_Idle_0: 1994497178
+      Player_Idle_1: -358430970
+      Player_Idle_2: 679255640
+      Player_Idle_3: -1104837529
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
