@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 78789254}
   - component: {fileID: 78789253}
   - component: {fileID: 78789252}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -1159,14 +1159,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016347834}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2109227205}
   - {fileID: 1062243142}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1543720603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1062243141
 GameObject:
@@ -1266,7 +1266,7 @@ GameObject:
   - component: {fileID: 1235418076}
   - component: {fileID: 1235418075}
   - component: {fileID: 1235418074}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Map
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -6303,6 +6303,7 @@ GameObject:
   - component: {fileID: 1543720602}
   - component: {fileID: 1543720601}
   - component: {fileID: 1543720604}
+  - component: {fileID: 1543720605}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6381,7 +6382,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1016347836}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1543720604
@@ -6428,6 +6430,40 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1543720605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543720600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1543994809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6696,7 +6732,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1543720603}
-  - {fileID: 1016347836}
   - {fileID: 316280335}
   - {fileID: 8467773014866569021}
   - {fileID: 1543994809}
