@@ -1158,7 +1158,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &262433168287374940
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   groundCheck: {fileID: 6011331641044341174}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!50 &3614921618403184232
 Rigidbody2D:
   serializedVersion: 4
