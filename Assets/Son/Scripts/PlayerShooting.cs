@@ -2,47 +2,47 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public Transform firePoint;
-    private SpriteRenderer spriteRenderer;
+    public Transform firePoint; // FirePoint để xác định hướng bắn
+    private PlayerRotation playerRotation; // Tham chiếu đến PlayerRotation script
+    public static bool Shot;
+    public float timeBetweenShots = 1f; // Thời gian giữa mỗi lần bắn (1 giây)
+    private float lastShotTime = 0f; // Lưu thời gian bắn lần cuối
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerRotation = GetComponent<PlayerRotation>(); // Lấy tham chiếu đến PlayerRotation
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Nhấn chuột trái
+        // Kiểm tra nếu chuột trái được nhấn và nếu thời gian đã trôi qua ít nhất 1 giây kể từ lần bắn trước
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastShotTime + timeBetweenShots) 
         {
-            Shoot();
+            Shot = true; // Player bắt đầu bắn
+            Shoot(); // Gọi hàm bắn
+            lastShotTime = Time.time; // Cập nhật thời gian bắn lần cuối
+        }
+
+        // Khi nhả chuột
+        if (Input.GetMouseButtonUp(0)) 
+        {
+            Shot = false; // Player ngừng bắn
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
+        // Tính hướng từ player đến chuột
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
-
+        mousePosition.z = 0f; // Set z = 0 để hoạt động trong không gian 2D
         Vector2 direction = (mousePosition - transform.position).normalized;
 
-        // Xác định hướng bắn để quay Player và FirePoint
-        if (direction.x > 0)
-        {
-            spriteRenderer.flipX = false; // Quay phải
-            firePoint.localPosition = new Vector3(Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, 0);
-        }
-        else if (direction.x < 0)
-        {
-            spriteRenderer.flipX = true; // Quay trái
-            firePoint.localPosition = new Vector3(-Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, 0);
-        }
+        // Quay player và firePoint theo hướng bắn
+        playerRotation.RotateToDirection(direction);
 
+        // Tạo viên đạn và bắn (theo hướng đã quay)
         Bullet bullet = BulletPool.Instance.GetBullet();
         bullet.transform.position = firePoint.position;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
         bullet.SetDirection(direction);
     }
 }

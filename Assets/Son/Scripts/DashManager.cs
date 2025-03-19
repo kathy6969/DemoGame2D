@@ -4,7 +4,6 @@ using System.Collections;
 
 public class DashManager : MonoBehaviour
 {
-    // Singleton instance để truy cập từ bất kỳ đâu
     public static DashManager Instance { get; private set; }
 
     [Header("UI Settings")]
@@ -12,33 +11,30 @@ public class DashManager : MonoBehaviour
     public float fillTime = 3f; // Thời gian để slider đầy
 
     [Header("Dash Control")]
-    // Biến kiểm tra dash: sẽ được set thành true khi slider đầy
-    public bool canDash = false;
+    public bool canDash = false;  // Biến kiểm tra nếu có thể dash
 
     private void Awake()
     {
-        // Thiết lập Singleton: nếu đã có instance khác thì hủy đối tượng này
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        // Đảm bảo slider khởi tạo từ 0
         if (dashSlider != null)
         {
-            dashSlider.value = 0;
-            StartCoroutine(FillSliderCoroutine());
+            dashSlider.value = 0;  // Bắt đầu từ giá trị 0
+            StartCoroutine(FillSliderCoroutine());  // Bắt đầu tiến trình nạp slider
         }
         else
         {
-            Debug.LogError("Dash Slider chưa được gán trong Inspector!");
+            Debug.LogError("DashSlider is not assigned!");
         }
     }
 
@@ -52,19 +48,18 @@ public class DashManager : MonoBehaviour
             dashSlider.value = timer / fillTime;
             yield return null;
         }
-        
-        dashSlider.value = 1;
-        // Khi slider đầy, đặt canDash = true và không reset slider
-        canDash = true;
-        Debug.Log("Slider is full, canDash = true");
+
+        dashSlider.value = 1;  // Khi slider đầy, đặt giá trị = 1
+        canDash = true;  // Cho phép người chơi thực hiện dash
     }
 
-    // Nếu sau khi dash được kích hoạt bạn muốn reset slider,
-    // có thể gọi phương thức này từ một script khác:
     public void ResetDash()
     {
+        // Reset slider về 0 khi dash được thực hiện
         dashSlider.value = 0;
         canDash = false;
+
+        // Bắt đầu lại tiến trình nạp slider sau khi reset
         StartCoroutine(FillSliderCoroutine());
     }
 }
