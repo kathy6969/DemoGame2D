@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackState : State
@@ -11,6 +12,9 @@ public class AttackState : State
     private AdvFireBall fireballScript;
     private Transform FirePoint;
     private Animator animator;
+    private float switchTime = 2f; // Thời gian đổi animation
+    private bool isAttack1 = true;
+    private MonoBehaviour coroutineRunner;
     public AttackState(BossStateMachine boss, GameObject fireballPrefab, Transform player, int fireballDamage)
     {
         this.boss = boss;
@@ -21,30 +25,50 @@ public class AttackState : State
     }
     public override void EnterState()
     {
-        //Debug.Log("Boss vào trạng thái tấn công!");
-        if (Random.value > 0.5f)
+        isAttack1 = Random.value > 0.5f;
+        PlayAttackAnimation();
+        // Lấy reference đến một MonoBehaviour (BossStateMachine chẳng hạn)
+        coroutineRunner = animator.GetComponent<MonoBehaviour>();
+
+        if (coroutineRunner != null)
         {
-            animator.SetBool("Attack1", true);
-        }
-        else
-        {
-            animator.SetBool("Attack2", true);
+            coroutineRunner.StartCoroutine(SwitchAttackAnimationCoroutine());
         }
     }
+
     public override void UpdateState()
     {
         FlipTowardsPlayer();
     }
+
     public override void ExitState()
     {
-        if (animator.GetBool("Attack1") == true)
+        if (coroutineRunner != null)
         {
-            animator.SetBool("Attack1", false);
+            coroutineRunner.StopCoroutine(SwitchAttackAnimationCoroutine());
         }
-        else if (animator.GetBool("Attack2") == true)
+    }
+
+    private void PlayAttackAnimation()
+    {
+        string[] attackTriggers = { "Fireball", "Firerain", "Fireburst" };
+        string triggerName = attackTriggers[Random.Range(0, attackTriggers.Length)];
+        animator.SetTrigger(triggerName);
+    }
+
+    private IEnumerator SwitchAttackAnimationCoroutine()
+    {
+        while (true)
         {
-            animator.SetBool("Attack2", false);
+            yield return new WaitForSeconds(switchTime);
+            SwitchAttackAnimation();
         }
+    }
+
+    private void SwitchAttackAnimation()
+    {
+        isAttack1 = !isAttack1;
+        PlayAttackAnimation();
     }
     private void FlipTowardsPlayer()
     {

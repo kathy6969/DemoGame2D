@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
     public GameObject coinPrefab;
     public Transform firePoint;

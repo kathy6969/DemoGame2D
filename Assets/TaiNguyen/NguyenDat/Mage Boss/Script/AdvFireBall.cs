@@ -36,8 +36,6 @@ public class AdvFireBall : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log($"Cầu lửa trúng người chơi! Gây {damage} sát thương");
-            // Gây sát thương cho người chơi ở đây (thêm hệ thống máu nếu có)
             Destroy(gameObject);
             HealthSystem playerHealth = collision.GetComponent<HealthSystem>();
             playerHealth.ApplyBurn(burnPercentage, burnDuration);

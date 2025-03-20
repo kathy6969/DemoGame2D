@@ -34,7 +34,6 @@ public class BossStateMachine : MonoBehaviour
             currentState.UpdateState(); // Gọi liên tục để cập nhật trạng thái
         }
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        Debug.Log($"Khoảng cách đến người chơi: {distanceToPlayer}");
         float minDistance = 3f; // Khoảng cách quá gần khiến boss dịch chuyển
         if (distanceToPlayer > attackRange && !(currentState is TeleportState))
         {
@@ -80,8 +79,6 @@ public class BossStateMachine : MonoBehaviour
     }
     private void SummonFireballs()
     {
-        Debug.Log("Triệu hồi cầu lửa từ trên cao!");
-
         float startX = transform.position.x - ((fireballCount - 1) * fireballSpacing / 2); // Điểm đầu để xếp hàng ngang
 
         for (int i = 0; i < fireballCount; i++)
