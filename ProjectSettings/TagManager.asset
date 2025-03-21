@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Item
   - die
-  - Dame
   layers:
   - Default
   - TransparentFX
@@ -15,8 +14,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - item
   - 
   - 
   - 
