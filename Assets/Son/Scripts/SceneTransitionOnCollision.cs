@@ -18,6 +18,10 @@ public class SceneTransitionOnCollision : MonoBehaviour
             // Chuyển sang scene tiếp theo trong danh sách
             LoadNextScene();
         }
+        if (collider.gameObject.CompareTag("die"))
+        {
+            SceneManager.LoadScene("Map 1");
+        }
     }
 
     // Hàm chuyển sang scene tiếp theo trong danh sách
