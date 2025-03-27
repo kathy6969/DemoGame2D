@@ -1,44 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossAI_WithAttackAndPatrol : MonoBehaviour
+public class BossAI_WithAttackAndMovement : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;         // Transform của player
-    public Animator animator;        // Animator của boss
-    public Rigidbody2D rb;           // Rigidbody2D của boss
-    public SpriteRenderer spriteRenderer; // SpriteRenderer để hiển thị và flip sprite
+    public Transform player;                   // Transform của player
+    public Animator animator;                  // Animator của boss
+    public Rigidbody2D rb;                     // Rigidbody2D của boss
+    public SpriteRenderer spriteRenderer;      // SpriteRenderer để hiển thị và flip sprite
 
-    [Header("Patrol Settings")]
-    public Transform leftPoint;      // Điểm bên trái để patrol
-    public Transform rightPoint;     // Điểm bên phải để patrol
-    public float patrolSpeed = 2f;   // Tốc độ di chuyển khi patrol
-    public float waitTime = 1f;      // Thời gian dừng lại khi đến điểm patrol
+    [Header("Movement Settings")]
+    public float moveSpeed = 2f;               // Tốc độ di chuyển khi không phát hiện player
+    public Transform groundCheck;              // Vị trí kiểm tra ground dưới chân
+    public float groundCheckRadius = 0.2f;       // Bán kính kiểm tra ground
+    public Transform siteCheck;                // Vị trí kiểm tra phía trước
+    public float siteCheckRadius = 0.2f;         // Bán kính kiểm tra site
+    public LayerMask groundLayer;              // Layer của các đối tượng ground
+    public float flipCooldownDuration = 1f;    // Thời gian chờ sau khi quay đầu
 
     [Header("Detection & Attack Settings")]
-    public float detectionRange = 10f;   // Phạm vi phát hiện player
-    public float attackRange = 2f;       // Khoảng cách đủ để tấn công
-    public float chaseSpeed = 3f;        // Tốc độ đuổi theo player
-    public float attackCooldown = 5f;    // Thời gian chờ sau mỗi đợt tấn công
+    public float detectionRange = 10f;         // Phạm vi phát hiện player
+    public float attackRange = 2f;             // Khoảng cách đủ để tấn công
+    public float chaseSpeed = 3f;              // Tốc độ đuổi theo player
+    public float attackCooldown = 5f;          // Thời gian chờ sau mỗi đợt tấn công
 
     [Header("Ultimate Attack Settings")]
-    public float ultimateAttackDuration = 3f; // Thời gian thi triển của chiêu tối thượng (Attack 4)
+    public float ultimateAttackDuration = 3f;  // Thời gian thi triển của chiêu tối thượng (Attack 4)
+
+    [Header("Teleport Settings")]
+    public float teleportCooldown = 5f;        // Thời gian chờ giữa các lần teleport
 
     // Nội bộ
-    private Transform currentPatrolTarget; // Điểm patrol hiện tại
-    private bool isAttacking = false;        // Cờ báo hiệu boss đang tấn công
-    private int lastAttack = -1;             // Kiểu attack vừa thực hiện
-    private int repeatCount = 0;             // Số lần lặp lại cùng kiểu attack
-    private bool facingRight = true;         // Theo dõi hướng của boss
-    private bool isPatrolActive = true;      // Cờ báo hiệu chế độ patrol đang hoạt động
+    private bool isAttacking = false;          // Cờ báo hiệu boss đang tấn công
+    private int lastAttack = -1;               // Kiểu attack vừa thực hiện
+    private int repeatCount = 0;               // Số lần lặp lại cùng kiểu attack
+    private bool facingRight = true;           // Theo dõi hướng của boss
+    private float lastFlipTime = -100f;        // Thời gian quay đầu gần nhất
+    private float lastTeleportTime = -100f;    // Thời gian teleport gần nhất
 
     void Start()
     {
-        // Khởi tạo điểm patrol ban đầu: giả sử boss bắt đầu hướng về bên phải
-        currentPatrolTarget = rightPoint;
-        // Hiện điểm patrol hiện tại và ẩn điểm kia
-        rightPoint.gameObject.SetActive(true);
-        leftPoint.gameObject.SetActive(false);
         // Đặt weight của Attack Layer (layer 1) mặc định = 0
         animator.SetLayerWeight(1, 0);
     }
@@ -50,21 +51,37 @@ public class BossAI_WithAttackAndPatrol : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.position);
         bool playerDetected = (distance <= detectionRange);
 
-        // Nếu boss đang tấn công, dừng các hoạt động khác
+        // Nếu boss đang tấn công, không cho di chuyển
         if (isAttacking)
             return;
 
         if (playerDetected)
         {
-            // Khi phát hiện player, tắt chế độ patrol
-            isPatrolActive = false;
+            // Kiểm tra teleport nếu đủ cooldown
+            if (Time.time >= lastTeleportTime + teleportCooldown)
+            {
+                // Kiểm tra xem người chơi có ở phía trước không
+                bool isPlayerInFront = ((player.position.x - transform.position.x > 0) && facingRight) ||
+                                       ((player.position.x - transform.position.x < 0) && !facingRight);
+                if (!isPlayerInFront)
+                {
+                    // Nếu người chơi phía sau, quay đầu (flip) và không teleport ngay
+                    Flip();
+                    lastTeleportTime = Time.time; // Cập nhật cooldown để tránh flip liên tục
+                    return;
+                }
+                TeleportToPlayer();
+                lastTeleportTime = Time.time;
+                return;
+            }
+
+            // Nếu không đủ cooldown teleport, tiếp tục chế độ chase hoặc attack
             if (distance > attackRange)
             {
                 ChasePlayer();
             }
             else
             {
-                // Đủ gần để attack: dừng di chuyển, bật Attack Layer, và thực hiện tấn công
                 rb.velocity = Vector2.zero;
                 animator.SetBool("isRunning", false);
                 animator.SetLayerWeight(1, 1);
@@ -73,59 +90,34 @@ public class BossAI_WithAttackAndPatrol : MonoBehaviour
         }
         else
         {
-            // Không phát hiện player: bật chế độ patrol
-            isPatrolActive = true;
-            animator.SetLayerWeight(1, 0);
-            Patrol();
+            // Nếu không phát hiện player, thực hiện di chuyển và kiểm tra môi trường
+            Move();
         }
     }
 
-    // Chế độ Patrol: boss di chuyển về phía điểm patrol hiện tại
-    void Patrol()
+    // Phương thức di chuyển mặc định: đi về phía trước
+    void Move()
     {
-        if (!isPatrolActive) return;
-        Vector2 direction = (currentPatrolTarget.position - transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * patrolSpeed, rb.velocity.y);
-        animator.SetBool("isRunning", true);
-        Flip(direction.x);
-    }
+        // Kiểm tra ground dưới chân và chướng ngại phía trước
+        bool isGroundAhead = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        bool isSiteBlocked = Physics2D.OverlapCircle(siteCheck.position, siteCheckRadius, groundLayer);
 
-    // Khi boss chạm vào điểm patrol (với BoxCollider2D có tag "PatrolPoint")
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!isPatrolActive) return;
-        if (other.CompareTag("PatrolPoint"))
+        // Nếu không có ground hoặc phía trước có chướng ngại, dừng lại và quay đầu (nếu đủ thời gian)
+        if (!isGroundAhead || isSiteBlocked)
         {
-            // "Chốt" vị trí: boss được đặt chính xác tại điểm đó và dừng chuyển động
             rb.velocity = Vector2.zero;
-            transform.position = other.transform.position;
-            StartCoroutine(PatrolWait());
+            if (Time.time >= lastFlipTime + flipCooldownDuration)
+            {
+                Flip();
+                lastFlipTime = Time.time;
+            }
+            return;
         }
-    }
 
-    // Coroutine chờ sau khi boss chạm vào điểm patrol, chuyển sang điểm đối diện và ẩn/hiện các đối tượng
-    IEnumerator PatrolWait()
-    {
-        isPatrolActive = false;
-        // Ẩn điểm patrol hiện tại để tránh va chạm liên tục
-        currentPatrolTarget.gameObject.SetActive(false);
-        yield return new WaitForSeconds(waitTime);
-
-        // Chuyển sang điểm patrol đối diện và hiển thị nó
-        if (currentPatrolTarget == rightPoint)
-        {
-            currentPatrolTarget = leftPoint;
-            leftPoint.gameObject.SetActive(true);
-        }
-        else
-        {
-            currentPatrolTarget = rightPoint;
-            rightPoint.gameObject.SetActive(true);
-        }
-        // Flip boss theo hướng mới
-        Vector2 newDir = (currentPatrolTarget.position - transform.position).normalized;
-        Flip(newDir.x);
-        isPatrolActive = true;
+        // Di chuyển theo hướng mặc định (theo biến facingRight)
+        float moveDir = facingRight ? 1f : -1f;
+        rb.velocity = new Vector2(moveDir * moveSpeed, rb.velocity.y);
+        animator.SetBool("isRunning", true);
     }
 
     // Chế độ Chase: boss đuổi theo player
@@ -135,6 +127,15 @@ public class BossAI_WithAttackAndPatrol : MonoBehaviour
         rb.velocity = new Vector2(direction.x * chaseSpeed, rb.velocity.y);
         animator.SetBool("isRunning", true);
         Flip(direction.x);
+    }
+
+    // Teleport boss tới vị trí của người chơi (giữ nguyên trục Z)
+    void TeleportToPlayer()
+    {
+        Vector3 targetPos = player.position;
+        targetPos.z = transform.position.z;
+        transform.position = targetPos;
+        Debug.Log("Teleported to player at " + targetPos);
     }
 
     // Coroutine xử lý tấn công
@@ -227,27 +228,41 @@ public class BossAI_WithAttackAndPatrol : MonoBehaviour
         yield return new WaitForSeconds(ultimateAttackDuration);
     }
 
-    // Hàm Flip: sử dụng spriteRenderer.flipX để lật sprite theo hướng di chuyển
+    // Hàm Flip: với tham số hướng nếu cần thiết
     void Flip(float moveDirection)
     {
-        if (moveDirection > 0)
+        if (moveDirection > 0 && !facingRight)
         {
-            spriteRenderer.flipX = false;
-            facingRight = true;
+            Flip();
         }
-        else if (moveDirection < 0)
+        else if (moveDirection < 0 && facingRight)
         {
-            spriteRenderer.flipX = true;
-            facingRight = false;
+            Flip();
         }
     }
 
-    // Vẽ Gizmos để hiển thị vùng detection (chỉ hiển thị trong Scene view khi bật Gizmos)
+    // Overload Flip(): đảo hướng hiện tại
+    void Flip()
+    {
+        facingRight = !facingRight;
+        // Lật sprite bằng cách đảo scale.x
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    // Vẽ Gizmos để hiển thị vùng kiểm tra trong Scene view
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
+        if (groundCheck != null)
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        if (siteCheck != null)
+            Gizmos.DrawWireSphere(siteCheck.position, siteCheckRadius);
+
         if (player != null)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, detectionRange);
         }
     }
