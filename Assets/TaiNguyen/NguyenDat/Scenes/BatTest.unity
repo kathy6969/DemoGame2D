@@ -2637,8 +2637,8 @@ Transform:
   m_GameObject: {fileID: 1785806825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.39, y: 6.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 16.4137, y: 5.9926, z: 0}
+  m_LocalScale: {x: 1.0119169, y: 0.9526, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 364279226}
@@ -2682,14 +2682,14 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1785806829}
     m_ColliderPaths:
-    - - X: 20000000
+    - - X: 20238338
         Y: 0
-      - X: -20000000
+      - X: -20238338
         Y: 0
-      - X: -20000000
-        Y: -10000000
-      - X: 20000000
-        Y: -10000000
+      - X: -20238338
+        Y: -9526000
+      - X: 20238338
+        Y: -9526000
   m_CompositePaths:
     m_Paths:
     - - {x: 1.9999708, y: -1}
@@ -3563,11 +3563,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1945964356279328298, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.67
+      value: 13.04
       objectReference: {fileID: 0}
     - target: {fileID: 1945964356279328298, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.27
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: 1945964356279328298, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_LocalPosition.z

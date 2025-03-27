@@ -16,7 +16,6 @@ public class TeleportState : State
 
     public override void EnterState()
     {
-        Debug.Log("Boss vào trạng thái dịch chuyển!");
         platforms.Clear(); // Xóa danh sách cũ để cập nhật lại platform
         GameObject[] platformObjects = GameObject.FindGameObjectsWithTag("Platform");
         foreach (GameObject obj in platformObjects)
@@ -58,7 +57,6 @@ public class TeleportState : State
 
         Vector3 newPosition = currentPlatform.position + new Vector3(0, 1f, 0); // Chuyển Vector2 thành Vector3
         boss.transform.position = newPosition;
-        Debug.Log($"Boss dịch chuyển đến {newPosition}");
     }
     private Transform FindClosestPlatform()
     {
