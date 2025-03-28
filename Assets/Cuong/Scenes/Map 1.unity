@@ -63165,12 +63165,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1223713671693378523, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
+      propertyPath: jumpForce
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1223713671693378523, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3334486134573554748, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.7
+      value: 168.7
       objectReference: {fileID: 0}
     - target: {fileID: 3334486134573554748, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
       propertyPath: m_LocalPosition.y

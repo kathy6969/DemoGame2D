@@ -11,4 +11,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TaiNguyen/Quan/Scenes/Home.unity
     guid: 2a42b24f51e218e4eb108552121ade4e
+  - enabled: 1
+    path: Assets/Cuong/Scenes/Map 1.unity
+    guid: b1a299eabc6e3184f82789b4b53910da
+  - enabled: 1
+    path: Assets/Cuong/Scenes/Map 2.unity
+    guid: acc47429d8468b94d83e0c70d64a89c6
+  - enabled: 1
+    path: Assets/Cuong/Scenes/Map 3.unity
+    guid: 3965ec00a3f983f43bdd34ffdf90181b
+  - enabled: 1
+    path: Assets/Cuong/Scenes/Map 4.unity
+    guid: 443e3e12149fa854c95cd50ff77ca481
+  - enabled: 1
+    path: Assets/Cuong/Scenes/Map 5.unity
+    guid: 0e64b8f0312930746a1b049326370a88
+  - enabled: 1
+    path: Assets/Cuong/Scenes/Map 6.unity
+    guid: c8cc3e5702df9064baef6ed4d3b6b7c6
   m_configObjects: {}
