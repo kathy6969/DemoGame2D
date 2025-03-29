@@ -16,7 +16,7 @@ public class AttackSystem : MonoBehaviour
     {
         
     }
-    public void SetDamage(float ATKDAME)
+    public void SetDame(float ATKDAME)
     {
         damage = ATKDAME;
     }
