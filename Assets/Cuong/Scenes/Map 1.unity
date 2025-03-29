@@ -63716,6 +63716,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7850412899753428498, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
+      propertyPath: Healbar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8709503902524742842, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -63732,6 +63736,7 @@ PrefabInstance:
     - {fileID: 6745541855453375649, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
     - {fileID: 176524772706934802, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
     - {fileID: 8550561424153783031, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
+    - {fileID: 7850412899753428498, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

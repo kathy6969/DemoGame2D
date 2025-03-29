@@ -7,8 +7,9 @@ public class BulletPool : MonoBehaviour
 
     public Bullet bulletPrefab;
     public int poolSize = 10;
-
     private Queue<Bullet> bulletPool = new Queue<Bullet>();
+
+    private Transform playerTransform; // Tham chiếu đến Player
 
     void Awake()
     {
@@ -17,9 +18,16 @@ public class BulletPool : MonoBehaviour
 
     void Start()
     {
+        playerTransform = GameObject.FindWithTag("Player").transform; // Tìm Player
+        if (playerTransform == null)
+        {
+            Debug.LogError("Không tìm thấy Player! Hãy đảm bảo Player có tag 'Player'");
+            return;
+        }
+
         for (int i = 0; i < poolSize; i++)
         {
-            Bullet bullet = Instantiate(bulletPrefab);
+            Bullet bullet = Instantiate(bulletPrefab, playerTransform);
             bullet.gameObject.SetActive(false);
             bulletPool.Enqueue(bullet);
         }
@@ -27,22 +35,25 @@ public class BulletPool : MonoBehaviour
 
     public Bullet GetBullet()
     {
+        Bullet bullet;
         if (bulletPool.Count > 0)
         {
-            Bullet bullet = bulletPool.Dequeue();
-            bullet.gameObject.SetActive(true);
-            return bullet;
+            bullet = bulletPool.Dequeue();
         }
         else
         {
-            Bullet newBullet = Instantiate(bulletPrefab);
-            return newBullet;
+            bullet = Instantiate(bulletPrefab, playerTransform);
         }
+
+        bullet.transform.SetParent(playerTransform); // Đặt viên đạn là con của Player
+        bullet.gameObject.SetActive(true);
+        return bullet;
     }
 
     public void ReturnBullet(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
+        bullet.transform.SetParent(playerTransform); // Đảm bảo viên đạn về Player khi trở lại pool
         bulletPool.Enqueue(bullet);
     }
 }

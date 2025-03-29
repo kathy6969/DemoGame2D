@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground")||collision.CompareTag("Enemy"))
         {
             BulletPool.Instance.ReturnBullet(this);
         }

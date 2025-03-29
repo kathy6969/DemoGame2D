@@ -1339,6 +1339,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChangeScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 939376746139893170, guid: fd603551687e477478acc87ca2338ced, type: 3}
+      propertyPath: sceneNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 939376746139893170, guid: fd603551687e477478acc87ca2338ced, type: 3}
+      propertyPath: sceneNames.Array.data[0]
+      value: Map 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8313090124962831627, guid: fd603551687e477478acc87ca2338ced, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.58

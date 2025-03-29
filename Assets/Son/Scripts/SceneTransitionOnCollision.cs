@@ -20,7 +20,7 @@ public class SceneTransitionOnCollision : MonoBehaviour
         }
         if (collider.gameObject.CompareTag("die"))
         {
-            SceneManager.LoadScene("Map 1");
+            LoadCurrentScene();
         }
     }
 
@@ -37,8 +37,12 @@ public class SceneTransitionOnCollision : MonoBehaviour
         // Đảm bảo Player sẽ ở vị trí (0, 0, 0) sau khi chuyển scene
         StartCoroutine(WaitAndMovePlayer());
     }
-
-    // Coroutine để đảm bảo Player được di chuyển sau khi scene đã tải
+    private void LoadCurrentScene()
+    {
+        SceneManager.LoadScene(scenesList[currentSceneIndex]);
+        StartCoroutine(WaitAndMovePlayer());
+    }
+    
     private IEnumerator WaitAndMovePlayer()
     {
         // Đợi một khung hình để đảm bảo scene đã tải
