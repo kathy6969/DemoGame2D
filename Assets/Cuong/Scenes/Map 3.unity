@@ -67175,6 +67175,7 @@ GameObject:
   - component: {fileID: 1811390515}
   - component: {fileID: 1811390514}
   - component: {fileID: 1811390518}
+  - component: {fileID: 1811390519}
   m_Layer: 7
   m_Name: Item
   m_TagString: Item
@@ -67457,13 +67458,26 @@ TilemapCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &1811390519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811390512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63248ca3added4c40a1d2fcc72b137ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmount: 10
 --- !u!1001 &1820631318
 PrefabInstance:
   m_ObjectHideFlags: 0
