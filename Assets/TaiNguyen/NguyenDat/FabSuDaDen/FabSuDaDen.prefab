@@ -276,10 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc2b420db8f1ca479d2600244e32556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 10
+  detectionRadius: 15
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   idleFlipInterval: 2
   isIdleFlipping: 1
 --- !u!114 &327657626579245011

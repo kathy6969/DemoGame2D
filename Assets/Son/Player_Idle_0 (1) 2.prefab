@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5473824229972731723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 353767358117332419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.82, z: 0}
+  m_LocalPosition: {x: 0, y: -0.726, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,7 +49,8 @@ GameObject:
   - component: {fileID: 6845626670014169303}
   - component: {fileID: 8083600201777290156}
   - component: {fileID: 6810717863939113199}
-  m_Layer: 0
+  - component: {fileID: 7850412899753428498}
+  m_Layer: 8
   m_Name: Player_Idle_0 (1) 2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -119,15 +120,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2143731980, guid: 29f2dd20892875949af80b7c52a1845f, type: 3}
+  m_Sprite: {fileID: 120788764, guid: 29f2dd20892875949af80b7c52a1845f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8125, y: 1.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7302488431706234659
@@ -140,7 +141,7 @@ Animator:
   m_GameObject: {fileID: 649748203978482367}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae8b67e10a0fee84196f1de1f3af14c0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 17ce596bc787846458b982aa39bba838, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -164,14 +165,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 9
+  jumpForce: 9.5
   dashForce: 10
   dashTime: 0.3
   dashCooldown: 1
   groundCheck: {fileID: 5473824229972731723}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!50 &876289046190826591
 Rigidbody2D:
   serializedVersion: 4
@@ -231,18 +232,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03925556, y: -0.09195024}
+  m_Offset: {x: 0.013508886, y: 0.051228046}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.8125, y: 1.1875}
+    newSize: {x: 0.8125, y: 1.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.70413196, y: 1.2219776}
+  m_Size: {x: 0.71116775, y: 1.1788464}
   m_EdgeRadius: 0
 --- !u!114 &7960879409132638184
 MonoBehaviour:
@@ -295,6 +296,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be206371ea8543247ad544b2dd09644f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7850412899753428498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649748203978482367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf7d9969ffe6234192f1d12ac72239c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  TotalHealth: 0
+  Healbar: {fileID: 176524772706934802}
+  invincibleTime: 1.5
+  isInvincible: 0
 --- !u!1 &1179458079329591180
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4720392240709079206}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,8 +359,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2323860104177154161}
   - component: {fileID: 4120871924050902215}
-  - component: {fileID: 6745541855453375649}
-  m_Layer: 5
+  - component: {fileID: 8550561424153783031}
+  - component: {fileID: 176524772706934802}
+  m_Layer: 8
   m_Name: HPslider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +441,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6745541855453375649
+--- !u!114 &8550561424153783031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,6 +455,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   hpSlider: {fileID: 4120871924050902215}
+--- !u!114 &176524772706934802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202209492493055928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3dedea7974616438967fd278cf75e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 4120871924050902215}
 --- !u!1 &2105536298635395771
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +479,7 @@ GameObject:
   - component: {fileID: 886448499660920412}
   - component: {fileID: 7124922755192870594}
   - component: {fileID: 8436513564659857899}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7681017613585631283}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +590,7 @@ GameObject:
   - component: {fileID: 33521985299726232}
   - component: {fileID: 124341768803515823}
   - component: {fileID: 2939117893382417112}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +665,7 @@ GameObject:
   - component: {fileID: 3819190260918472671}
   - component: {fileID: 5145903945957760895}
   - component: {fileID: 6722507956994001567}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -706,7 +738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1705209353359492002}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +777,7 @@ GameObject:
   - component: {fileID: 1719446591709949461}
   - component: {fileID: 6662196981985994011}
   - component: {fileID: 307960451637862141}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -849,7 +881,7 @@ GameObject:
   - component: {fileID: 8799729043185907703}
   - component: {fileID: 5803418296904836109}
   - component: {fileID: 8919310199268812510}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +956,7 @@ GameObject:
   - component: {fileID: 505444951011124126}
   - component: {fileID: 3230986800459758236}
   - component: {fileID: 8747137039296957163}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TextHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1005,7 +1037,7 @@ GameObject:
   - component: {fileID: 2381480843253755130}
   - component: {fileID: 7556302651337713352}
   - component: {fileID: 3520237553559855610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1156,7 +1188,7 @@ GameObject:
   - component: {fileID: 4563782556646212632}
   - component: {fileID: 8290032033973733858}
   - component: {fileID: 8131654297084038968}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1231,7 +1263,7 @@ GameObject:
   - component: {fileID: 8709503902524742842}
   - component: {fileID: 5539544542633726726}
   - component: {fileID: 7136616486371140213}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1339,7 @@ GameObject:
   - component: {fileID: 526008054791375755}
   - component: {fileID: 4480064952885833895}
   - component: {fileID: 8524798744382500827}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TextCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6189915409702978880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1428,7 +1460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6106133679824702810}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1467,7 +1499,7 @@ GameObject:
   - component: {fileID: 2057701038015304831}
   - component: {fileID: 27475284909760143}
   - component: {fileID: 3037147977021480425}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Luotslider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1586,7 +1618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834595984027771814}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1617,7 +1649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6412082544337879027}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,6 +1726,10 @@ PrefabInstance:
     - target: {fileID: 4567132026723124374, guid: 5e68027ac17417c46892350be48d3a72, type: 3}
       propertyPath: m_Name
       value: BulletPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567132026723124374, guid: 5e68027ac17417c46892350be48d3a72, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

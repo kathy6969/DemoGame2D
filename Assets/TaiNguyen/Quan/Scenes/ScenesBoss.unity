@@ -679,13 +679,14 @@ MonoBehaviour:
   siteCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   flipCooldownDuration: 1
   detectionRange: 10
   attackRange: 2
   chaseSpeed: 3
   attackCooldown: 5
   ultimateAttackDuration: 3
+  teleportCooldown: 5
 --- !u!50 &1160044040
 Rigidbody2D:
   serializedVersion: 4
@@ -831,7 +832,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1634087756

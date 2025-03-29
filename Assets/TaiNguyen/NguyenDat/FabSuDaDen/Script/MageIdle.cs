@@ -39,7 +39,7 @@ public class MageIdle : MonoBehaviour
                 mageAttack.SetTarget(playerTransform);
                 mageAttack.BeingAttack();
                 isIdleFlipping = false; // Dừng tự động lật hướng khi phát hiện Player
-                Debug.Log("Pháp sư đã phát hiện người chơi và bắt đầu tấn công!");
+                //Debug.Log("Pháp sư đã phát hiện người chơi và bắt đầu tấn công!");
             
         }
         else
@@ -47,7 +47,7 @@ public class MageIdle : MonoBehaviour
                 playerTransform = null;
                 mageAttack.StopAttack();
                 isIdleFlipping = true; // Cho phép tự động lật hướng khi Player rời đi
-                Debug.Log("Pháp sư đã ngừng tấn công, quay lại trạng thái Idle!");
+                //Debug.Log("Pháp sư đã ngừng tấn công, quay lại trạng thái Idle!");
         }
     }
 

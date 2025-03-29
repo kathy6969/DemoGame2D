@@ -262,9 +262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf7d9969ffe6234192f1d12ac72239c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHeal: 100
-  TotalHeal: 100
+  MaxHealth: 100
+  TotalHealth: 0
   Healbar: {fileID: 6760055794104316646}
+  invincibleTime: 1.5
+  isInvincible: 0
 --- !u!114 &579119172481589431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +299,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
 --- !u!114 &5540463154703321937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ccc3d9c384814bb6c5f29d771cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 25
+  damage: 10
 --- !u!1001 &1118234773825172980
 PrefabInstance:
   m_ObjectHideFlags: 0
