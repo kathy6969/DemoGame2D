@@ -5,104 +5,103 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 {
     [Header("References")]
     public Transform player;                   // Transform của player
-    public Animator animator;                  // Animator của boss
+    public Animator animator;                  // Animator của boss (sử dụng layer để chuyển đổi trạng thái)
     public Rigidbody2D rb;                     // Rigidbody2D của boss
     public SpriteRenderer spriteRenderer;      // SpriteRenderer để hiển thị và flip sprite
 
     [Header("Movement Settings")]
     public float moveSpeed = 2f;               // Tốc độ di chuyển khi không phát hiện player
-    public Transform groundCheck;              // Vị trí kiểm tra ground dưới chân
-    public float groundCheckRadius = 0.2f;       // Bán kính kiểm tra ground
-    public Transform siteCheck;                // Vị trí kiểm tra phía trước
-    public float siteCheckRadius = 0.2f;         // Bán kính kiểm tra site
-    public LayerMask groundLayer;              // Layer của các đối tượng ground
-    public float flipCooldownDuration = 1f;    // Thời gian chờ sau khi quay đầu
+    public Transform groundCheck;              // Vị trí kiểm tra ground của boss
+    public float groundCheckRadius = 0.2f;
+    public Transform siteCheck;                // Vị trí kiểm tra phía trước của boss
+    public float siteCheckRadius = 0.2f;         // Sẽ được nhân đôi
+    public LayerMask groundLayer;
+    public float flipCooldownDuration = 1f;
 
     [Header("Detection & Attack Settings")]
-    public float detectionRange = 10f;         // Phạm vi phát hiện player
+    public float detectionRange = 20f;         // Vùng phát hiện player (20f)
     public float attackRange = 2f;             // Khoảng cách đủ để tấn công
-    public float chaseSpeed = 3f;              // Tốc độ đuổi theo player
-    public float attackCooldown = 5f;          // Thời gian chờ sau mỗi đợt tấn công
+    public float chaseSpeed = 3f;              // Tốc độ đuổi theo (vẫn là tốc độ đi bộ)
+    public float attackCooldown = 7f;
 
     [Header("Ultimate Attack Settings")]
-    public float ultimateAttackDuration = 3f;  // Thời gian thi triển của chiêu tối thượng (Attack 4)
+    public float ultimateAttackDuration = 5f;  // Tổng thời gian mỗi kiểu attack là 5 giây
 
     [Header("Teleport Settings")]
-    public float teleportCooldown = 5f;        // Thời gian chờ giữa các lần teleport
+    public float teleportCooldown = 7f;
+    [Tooltip("Khoảng cách tối thiểu để thực hiện teleport (ví dụ: 4f)")]
+    public float teleportMinDistance = 4f;
+    [Tooltip("Khoảng cách tối đa để thực hiện teleport (ví dụ: 20f)")]
+    public float teleportMaxDistance = 20f;
 
     // Nội bộ
-    private bool isAttacking = false;          // Cờ báo hiệu boss đang tấn công
-    private int lastAttack = -1;               // Kiểu attack vừa thực hiện
-    private int repeatCount = 0;               // Số lần lặp lại cùng kiểu attack
-    private bool facingRight = true;           // Theo dõi hướng của boss
-    private float lastFlipTime = -100f;        // Thời gian quay đầu gần nhất
-    private float lastTeleportTime = -100f;    // Thời gian teleport gần nhất
+    private bool isAttacking = false;
+    private bool facingRight = true;
+    private float lastFlipTime = -100f;
+    private float lastTeleportTime = -100f;
+
+    // Tốc độ tấn công riêng cho các kiểu di chuyển (Attack 1 và 3)
+    public float attackMoveSpeed = 3f;       // tốc độ tấn công (boss chạy) = 2 * moveSpeed (ví dụ)
 
     void Start()
     {
-        // Đặt weight của Attack Layer (layer 1) mặc định = 0
+        // Ẩn layer attack ban đầu (giả sử layer attack là layer 1)
         animator.SetLayerWeight(1, 0);
+        siteCheckRadius *= 2f; // nhân đôi bán kính của siteCheck
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
 
         float distance = Vector2.Distance(transform.position, player.position);
         bool playerDetected = (distance <= detectionRange);
 
-        // Nếu boss đang tấn công, không cho di chuyển
+        // Nếu boss đang attack thì chỉ xử lý các logic phụ (ví dụ: dừng trạng thái chạy nếu có chướng ngại)
         if (isAttacking)
+        {
+            if (Physics2D.OverlapCircle(siteCheck.position, siteCheckRadius, groundLayer))
+                animator.SetBool("isRunning", false);
             return;
+        }
 
         if (playerDetected)
         {
-            // Kiểm tra teleport nếu đủ cooldown
-            if (Time.time >= lastTeleportTime + teleportCooldown)
+            // Kiểm tra teleport: nếu đủ cooldown, khoảng cách trong [teleportMinDistance, teleportMaxDistance]
+            if (Time.time >= lastTeleportTime + teleportCooldown &&
+                distance >= teleportMinDistance && distance <= teleportMaxDistance)
             {
-                // Kiểm tra xem người chơi có ở phía trước không
-                bool isPlayerInFront = ((player.position.x - transform.position.x > 0) && facingRight) ||
-                                       ((player.position.x - transform.position.x < 0) && !facingRight);
-                if (!isPlayerInFront)
-                {
-                    // Nếu người chơi phía sau, quay đầu (flip) và không teleport ngay
-                    Flip();
-                    lastTeleportTime = Time.time; // Cập nhật cooldown để tránh flip liên tục
-                    return;
-                }
                 TeleportToPlayer();
                 lastTeleportTime = Time.time;
                 return;
             }
 
-            // Nếu không đủ cooldown teleport, tiếp tục chế độ chase hoặc attack
             if (distance > attackRange)
             {
                 ChasePlayer();
             }
             else
             {
+                // Khi player trong attackRange, boss đứng yên và bắt đầu tấn công
                 rb.velocity = Vector2.zero;
                 animator.SetBool("isRunning", false);
+                // Bật layer attack (chuyển sang animation tấn công)
                 animator.SetLayerWeight(1, 1);
                 StartCoroutine(HandleAttack());
             }
         }
         else
         {
-            // Nếu không phát hiện player, thực hiện di chuyển và kiểm tra môi trường
+            // Nếu không có player, boss chuyển theo cách patrol (dựa vào groundCheck và siteCheck)
             Move();
         }
     }
 
-    // Phương thức di chuyển mặc định: đi về phía trước
     void Move()
     {
-        // Kiểm tra ground dưới chân và chướng ngại phía trước
         bool isGroundAhead = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         bool isSiteBlocked = Physics2D.OverlapCircle(siteCheck.position, siteCheckRadius, groundLayer);
-
-        // Nếu không có ground hoặc phía trước có chướng ngại, dừng lại và quay đầu (nếu đủ thời gian)
         if (!isGroundAhead || isSiteBlocked)
         {
             rb.velocity = Vector2.zero;
@@ -114,22 +113,20 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
             return;
         }
 
-        // Di chuyển theo hướng mặc định (theo biến facingRight)
         float moveDir = facingRight ? 1f : -1f;
         rb.velocity = new Vector2(moveDir * moveSpeed, rb.velocity.y);
         animator.SetBool("isRunning", true);
     }
 
-    // Chế độ Chase: boss đuổi theo player
     void ChasePlayer()
     {
+        // Boss vẫn đi bộ theo player
         Vector2 direction = (player.position - transform.position).normalized;
         rb.velocity = new Vector2(direction.x * chaseSpeed, rb.velocity.y);
         animator.SetBool("isRunning", true);
         Flip(direction.x);
     }
 
-    // Teleport boss tới vị trí của người chơi (giữ nguyên trục Z)
     void TeleportToPlayer()
     {
         Vector3 targetPos = player.position;
@@ -138,7 +135,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         Debug.Log("Teleported to player at " + targetPos);
     }
 
-    // Coroutine xử lý tấn công
     IEnumerator HandleAttack()
     {
         isAttacking = true;
@@ -146,112 +142,136 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         animator.SetInteger("attackType", attackType);
         animator.SetBool("canAttack", true);
 
+        // Nếu attackType là 1 hoặc 3, boss sẽ chuyển sang tốc độ di chuyển nhanh (chạy)
         switch (attackType)
         {
             case 1:
-            case 2:
                 yield return StartCoroutine(Attack_Run());
+                break;
+            case 2:
+                // Các kiểu attack khác dùng event script riêng (đứng yên)
+                yield return StartCoroutine(Attack_FireOrbs());
                 break;
             case 3:
                 yield return StartCoroutine(Attack_Dash());
                 break;
             case 4:
-                yield return StartCoroutine(Attack_Ultimate());
+                yield return StartCoroutine(Attack_FireOrbStraight());
+                break;
+            case 5:
+                yield return StartCoroutine(Attack_SummonSkeletons());
+                break;
+            case 6:
+                yield return StartCoroutine(Attack_FireballsFromAbove());
+                break;
+            case 7:
+                yield return StartCoroutine(Attack_ShootFireball());
                 break;
         }
 
         animator.SetBool("canAttack", false);
+        // Tắt layer attack sau khi attack
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
     }
 
-    // Hàm chọn kiểu tấn công ngẫu nhiên (1-4) với giới hạn không lặp lại quá 3 lần cùng kiểu
+    // Chọn kiểu tấn công ngẫu nhiên từ 1 đến 7
     int ChooseAttackType()
     {
-        int attackType;
-        do
-        {
-            attackType = Random.Range(1, 5); // Chọn số từ 1 đến 4
-        } while (attackType == lastAttack && repeatCount >= 3);
-
-        if (attackType == lastAttack)
-            repeatCount++;
-        else
-            repeatCount = 0;
-
-        lastAttack = attackType;
-        return attackType;
+        return Random.Range(1, 8);
     }
 
-    // Kiểu tấn công: Chạy tấn công (Attack 1 & 2)
+    // --- Các kiểu Attack ---
+    // Attack 1: Boss chạy tấn công (với tốc độ tăng gấp 2 lần)
     IEnumerator Attack_Run()
     {
-        Debug.Log("Executing Run Attack");
-        float attackSpeed = 5f;
-        float attackDuration = 1f;
+        Debug.Log("Executing Run Attack (Attack 1)");
+        float duration = 1f;  // thời gian tấn công (chạy)
         float timer = 0f;
+        // Tính hướng tiến tới player (không cần kiểm tra phía trước)
         Vector2 direction = (player.position - transform.position).normalized;
-        Flip(direction.x);
-        while (timer < attackDuration)
+        // Sử dụng tốc độ tấn công tăng gấp 2 lần so với attackMoveSpeed (đã cấu hình = 3f, ví dụ)
+        while (timer < duration)
         {
-            rb.velocity = new Vector2(direction.x * attackSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(direction.x * attackMoveSpeed, rb.velocity.y);
             timer += Time.deltaTime;
             yield return null;
         }
         rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(5f - duration);
     }
 
-    // Kiểu tấn công: Lướt tấn công (Attack 3)
+    // Attack 3: Boss lướt (vận tốc tăng gấp 2 lần trong quá trình lướt)
     IEnumerator Attack_Dash()
     {
-        Debug.Log("Executing Dash Attack");
+        Debug.Log("Executing Dash Attack (Attack 3)");
         Vector2 startPos = transform.position;
-        Vector2 targetPos = player.position;
-        float dashDuration = 0.5f;
+        float dashDistance = 4f;
+        Vector2 targetPos = startPos + new Vector2(facingRight ? dashDistance : -dashDistance, 0);
+        float duration = 0.5f;
         float timer = 0f;
-        Flip(player.position.x - transform.position.x);
-        while (timer < dashDuration)
+        while (timer < duration)
         {
-            transform.position = Vector2.Lerp(startPos, targetPos, timer / dashDuration);
+            // Sử dụng tốc độ tấn công tăng gấp 2 lần
+            transform.position = Vector2.Lerp(startPos, targetPos, timer / duration);
             timer += Time.deltaTime;
             yield return null;
         }
         transform.position = targetPos;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(5f - duration);
     }
 
-    // Kiểu tấn công: Ultimate Attack (Attack 4) với thời gian thi triển dài hơn
-    IEnumerator Attack_Ultimate()
+    // Các kiểu Attack còn lại sử dụng coroutine đơn giản (boss đứng yên)
+    IEnumerator Attack_FireOrbs()
     {
-        Debug.Log("Executing Ultimate Attack (Attack 4)");
-        yield return new WaitForSeconds(ultimateAttackDuration);
+        Debug.Log("Executing Fire Orbs Attack (Attack 2)");
+        // Gọi sự kiện từ Animation Event hoặc có thể gọi trực tiếp hàm của script event (xem phần bên dưới)
+        // Ví dụ: Sự kiện này sẽ được xử lý bởi script Attack2_FireOrbs (được gắn trên boss hoặc object phụ)
+        yield return new WaitForSeconds(5f);
     }
 
-    // Hàm Flip: với tham số hướng nếu cần thiết
+    IEnumerator Attack_FireOrbStraight()
+    {
+        Debug.Log("Executing Fire Orb Straight Attack (Attack 4)");
+        yield return new WaitForSeconds(5f);
+    }
+
+    IEnumerator Attack_SummonSkeletons()
+    {
+        Debug.Log("Executing Summon Skeletons Attack (Attack 5)");
+        yield return new WaitForSeconds(5f);
+    }
+
+    IEnumerator Attack_FireballsFromAbove()
+    {
+        Debug.Log("Executing Fireballs From Above Attack (Attack 6)");
+        yield return new WaitForSeconds(5f);
+    }
+
+    IEnumerator Attack_ShootFireball()
+    {
+        Debug.Log("Executing Shoot Fireball Attack (Attack 7)");
+        yield return new WaitForSeconds(5f);
+    }
+
+    // --- Các hàm hỗ trợ ---
     void Flip(float moveDirection)
     {
         if (moveDirection > 0 && !facingRight)
-        {
             Flip();
-        }
         else if (moveDirection < 0 && facingRight)
-        {
             Flip();
-        }
     }
 
-    // Overload Flip(): đảo hướng hiện tại
     void Flip()
     {
         facingRight = !facingRight;
-        // Lật sprite bằng cách đảo scale.x
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
     }
 
-    // Vẽ Gizmos để hiển thị vùng kiểm tra trong Scene view
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -259,7 +279,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         if (siteCheck != null)
             Gizmos.DrawWireSphere(siteCheck.position, siteCheckRadius);
-
         if (player != null)
         {
             Gizmos.color = Color.blue;
