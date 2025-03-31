@@ -179,6 +179,34 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1634087756}
+    - target: {fileID: 2698999819945862929, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: fireballPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806489948804597689, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: fireballPlayerPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806489948804597689, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: fireballPlayerSpawnPoint
+      value: 
+      objectReference: {fileID: 779989330205031776, guid: 857a6bb3f629e14478ae32677ffe0614, type: 3}
+    - target: {fileID: 5424854831164989666, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: fireOrbPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992771989330864600, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: fireOrbSpawnPoint
+      value: 
+      objectReference: {fileID: 779989330205031776, guid: 857a6bb3f629e14478ae32677ffe0614, type: 3}
+    - target: {fileID: 5992771989330864600, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: fireOrbStraightPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145775677678430547, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: skeletonPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6711651836184745972, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01
