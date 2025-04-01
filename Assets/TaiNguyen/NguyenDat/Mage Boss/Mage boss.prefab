@@ -290,8 +290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 386702791965574949, guid: 149216adfd340d24baaf5baa3bc7cd96, type: 3}
-  player: {fileID: 0}
-  fireballDamage: 10
+  player: {fileID: 3334486134573554748, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
+  fireballDamage: 20
   attackRange: 10
   FirePoint: {fileID: 3027912136257764779}
   fireballCount: 10
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf7d9969ffe6234192f1d12ac72239c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 200
   TotalHealth: 0
   Healbar: {fileID: 8693642592113354943}
   invincibleTime: 1.5

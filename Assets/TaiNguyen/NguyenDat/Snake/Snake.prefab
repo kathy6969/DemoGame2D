@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ccc3d9c384814bb6c5f29d771cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  damage: 5
 --- !u!114 &634722459341174100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,10 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf7d9969ffe6234192f1d12ac72239c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 25
+  MaxHealth: 200
   TotalHealth: 0
   Healbar: {fileID: 4126956486394246314}
   invincibleTime: 1.5
+  isInvincible: 0
 --- !u!114 &2865748268940211898
 MonoBehaviour:
   m_ObjectHideFlags: 0
