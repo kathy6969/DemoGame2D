@@ -5,7 +5,7 @@ public class PlayerShooting : MonoBehaviour
     public Transform firePoint; // FirePoint để xác định hướng bắn
     private PlayerRotation playerRotation; // Tham chiếu đến PlayerRotation script
     public static bool Shot;
-    public float timeBetweenShots = 1f; // Thời gian giữa mỗi lần bắn (1 giây)
+    public float timeBetweenShots = 5f; // Thời gian giữa mỗi lần bắn (1 giây)
     private float lastShotTime = 0f; // Lưu thời gian bắn lần cuối
 
     void Start()
@@ -32,15 +32,10 @@ public class PlayerShooting : MonoBehaviour
 
     public void Shoot()
     {
-        // Tính hướng từ player đến chuột
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f; // Set z = 0 để hoạt động trong không gian 2D
-        Vector2 direction = (mousePosition - transform.position).normalized;
-
-        // Quay player và firePoint theo hướng bắn
+        mousePosition.z = 0f; 
+        Vector2 direction = (mousePosition - firePoint.transform.position).normalized;
         playerRotation.RotateToDirection(direction);
-
-        // Tạo viên đạn và bắn (theo hướng đã quay)
         Bullet bullet = BulletPool.Instance.GetBullet();
         bullet.transform.position = firePoint.position;
         bullet.SetDirection(direction);
