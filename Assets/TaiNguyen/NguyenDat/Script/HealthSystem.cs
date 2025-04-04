@@ -12,7 +12,7 @@ public class HealthSystem : MonoBehaviour
 
     void Start()
     {
-        Healbar = FindObjectOfType<FloatingHealbar>(); 
+        Healbar = GetComponentInChildren<FloatingHealbar>(); 
         TotalHealth = MaxHealth;
         Healbar.UpdateHealbar(TotalHealth, MaxHealth);
         debuffSystem = GetComponent<DebuffSystem>();
