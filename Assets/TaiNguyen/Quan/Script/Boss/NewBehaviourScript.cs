@@ -14,13 +14,13 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     public Transform groundCheck;              // Vị trí kiểm tra ground của boss
     public float groundCheckRadius = 0.2f;
     public Transform siteCheck;                // Vị trí kiểm tra phía trước của boss
-    public float siteCheckRadius = 0.2f;         // Sẽ được nhân đôi
+    public float siteCheckRadius = 0.2f;         // (Sẽ được nhân đôi)
     public LayerMask groundLayer;
     public float flipCooldownDuration = 1f;
 
     [Header("Detection & Attack Settings")]
     public float detectionRange = 20f;         // Vùng phát hiện player (20f)
-    public float attackRange = 2f;             // Khoảng cách đủ để tấn công
+    public float attackRange = 4f;             // Khoảng cách đủ để tấn công (4 đơn vị)
     public float chaseSpeed = 3f;              // Tốc độ đuổi theo (vẫn là tốc độ đi bộ)
     public float attackCooldown = 7f;
 
@@ -41,7 +41,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     private float lastTeleportTime = -100f;
 
     // Tốc độ tấn công riêng cho các kiểu di chuyển (Attack 1 và 3)
-    public float attackMoveSpeed = 3f;       // tốc độ tấn công (boss chạy) = 2 * moveSpeed (ví dụ)
+    public float attackMoveSpeed = 3f;       // tốc độ tấn công (boss chạy)
 
     void Start()
     {
@@ -54,6 +54,13 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     {
         if (player == null)
             return;
+
+        // Luôn luôn quay mặt về phía player
+        float diff = player.position.x - transform.position.x;
+        if (diff > 0 && !facingRight)
+            Flip();
+        else if (diff < 0 && facingRight)
+            Flip();
 
         float distance = Vector2.Distance(transform.position, player.position);
         bool playerDetected = (distance <= detectionRange);
@@ -68,7 +75,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 
         if (playerDetected)
         {
-            // Kiểm tra teleport: nếu đủ cooldown, khoảng cách trong [teleportMinDistance, teleportMaxDistance]
+            // Kiểm tra teleport: nếu đủ cooldown và khoảng cách nằm trong giới hạn cho phép
             if (Time.time >= lastTeleportTime + teleportCooldown &&
                 distance >= teleportMinDistance && distance <= teleportMaxDistance)
             {
@@ -77,23 +84,23 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
                 return;
             }
 
-            if (distance > attackRange)
+            // Nếu player ở trong phạm vi tấn công (4 đơn vị), boss dừng di chuyển và tấn công
+            if (distance <= attackRange)
             {
-                ChasePlayer();
+                rb.velocity = Vector2.zero;
+                animator.SetBool("isRunning", false);
+                animator.SetLayerWeight(1, 1);
+                StartCoroutine(HandleAttack());
             }
             else
             {
-                // Khi player trong attackRange, boss đứng yên và bắt đầu tấn công
-                rb.velocity = Vector2.zero;
-                animator.SetBool("isRunning", false);
-                // Bật layer attack (chuyển sang animation tấn công)
-                animator.SetLayerWeight(1, 1);
-                StartCoroutine(HandleAttack());
+                // Nếu player ngoài phạm vi tấn công, boss sẽ đuổi theo player
+                ChasePlayer();
             }
         }
         else
         {
-            // Nếu không có player, boss chuyển theo cách patrol (dựa vào groundCheck và siteCheck)
+            // Nếu không có player, boss di chuyển theo chế độ patrol/dựa vào groundCheck và siteCheck
             Move();
         }
     }
@@ -120,7 +127,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 
     void ChasePlayer()
     {
-        // Boss vẫn đi bộ theo player
+        // Boss đuổi theo player
         Vector2 direction = (player.position - transform.position).normalized;
         rb.velocity = new Vector2(direction.x * chaseSpeed, rb.velocity.y);
         animator.SetBool("isRunning", true);
@@ -142,14 +149,13 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         animator.SetInteger("attackType", attackType);
         animator.SetBool("canAttack", true);
 
-        // Nếu attackType là 1 hoặc 3, boss sẽ chuyển sang tốc độ di chuyển nhanh (chạy)
+        // Giữ nguyên logic tấn công hiện tại
         switch (attackType)
         {
             case 1:
                 yield return StartCoroutine(Attack_Run());
                 break;
             case 2:
-                // Các kiểu attack khác dùng event script riêng (đứng yên)
                 yield return StartCoroutine(Attack_FireOrbs());
                 break;
             case 3:
@@ -170,7 +176,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         }
 
         animator.SetBool("canAttack", false);
-        // Tắt layer attack sau khi attack
         animator.SetLayerWeight(1, 0);
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
@@ -183,15 +188,12 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     }
 
     // --- Các kiểu Attack ---
-    // Attack 1: Boss chạy tấn công (với tốc độ tăng gấp 2 lần)
     IEnumerator Attack_Run()
     {
         Debug.Log("Executing Run Attack (Attack 1)");
-        float duration = 1f;  // thời gian tấn công (chạy)
+        float duration = 1f;
         float timer = 0f;
-        // Tính hướng tiến tới player (không cần kiểm tra phía trước)
         Vector2 direction = (player.position - transform.position).normalized;
-        // Sử dụng tốc độ tấn công tăng gấp 2 lần so với attackMoveSpeed (đã cấu hình = 3f, ví dụ)
         while (timer < duration)
         {
             rb.velocity = new Vector2(direction.x * attackMoveSpeed, rb.velocity.y);
@@ -202,7 +204,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         yield return new WaitForSeconds(5f - duration);
     }
 
-    // Attack 3: Boss lướt (vận tốc tăng gấp 2 lần trong quá trình lướt)
     IEnumerator Attack_Dash()
     {
         Debug.Log("Executing Dash Attack (Attack 3)");
@@ -213,7 +214,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         float timer = 0f;
         while (timer < duration)
         {
-            // Sử dụng tốc độ tấn công tăng gấp 2 lần
             transform.position = Vector2.Lerp(startPos, targetPos, timer / duration);
             timer += Time.deltaTime;
             yield return null;
@@ -222,12 +222,9 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         yield return new WaitForSeconds(5f - duration);
     }
 
-    // Các kiểu Attack còn lại sử dụng coroutine đơn giản (boss đứng yên)
     IEnumerator Attack_FireOrbs()
     {
         Debug.Log("Executing Fire Orbs Attack (Attack 2)");
-        // Gọi sự kiện từ Animation Event hoặc có thể gọi trực tiếp hàm của script event (xem phần bên dưới)
-        // Ví dụ: Sự kiện này sẽ được xử lý bởi script Attack2_FireOrbs (được gắn trên boss hoặc object phụ)
         yield return new WaitForSeconds(5f);
     }
 
