@@ -2,21 +2,40 @@
 
 public class Attack4_FireOrbStraight : MonoBehaviour
 {
-    public GameObject fireOrbStraightPrefab;
+    [Header("Prefab & Settings")]
+    public GameObject fireOrbStraightPrefab; // Viên đạn (phải là prefab)
     public float fireOrbStraightSpeed = 5f;
-    public Transform fireOrbSpawnPoint; // Nếu không gán, sử dụng vị trí của object chứa script
 
+    [Header("Vị trí sinh đạn")]
+    public Transform fireOrbSpawnPoint; // Điểm đặt thủ công trong scene
+
+    // Hàm này sẽ gọi trong Animation Event
     public void ExecuteAttack4()
     {
+        if (fireOrbStraightPrefab == null)
+        {
+            Debug.LogError("Chưa gán Prefab đạn!");
+            return;
+        }
+
         if (fireOrbSpawnPoint == null)
-            fireOrbSpawnPoint = transform;
+        {
+            Debug.LogError("Chưa gán fireOrbSpawnPoint!");
+            return;
+        }
+
+        // Tạo đạn tại vị trí spawn
         GameObject orb = Instantiate(fireOrbStraightPrefab, fireOrbSpawnPoint.position, Quaternion.identity);
+
+        // Thiết lập hướng bay dựa vào hướng Boss (scale.x)
         Rigidbody2D rb = orb.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            // Hướng được quyết định dựa trên scale.x (flip) của object chứa script
-            Vector2 direction = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+            Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
             rb.velocity = direction * fireOrbStraightSpeed;
         }
+
+        // Tự hủy sau 5s
+        Destroy(orb, 5f);
     }
 }
