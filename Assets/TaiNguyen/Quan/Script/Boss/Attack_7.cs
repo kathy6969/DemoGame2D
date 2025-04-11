@@ -1,26 +1,30 @@
 ﻿using UnityEngine;
 
-public class Attack7_ShootFireball : MonoBehaviour
+public class Attack_ShootAtPlayer : MonoBehaviour
 {
-    public GameObject fireballPlayerPrefab;
-    public float fireballPlayerSpeed = 7f;
-    public Transform fireballPlayerSpawnPoint; // Nếu không gán, sử dụng vị trí của object chứa script
+    public GameObject fireballPrefab;
+    public float fireballSpeed = 7f;
+    public Transform spawnPoint; // Nếu null sẽ dùng vị trí hiện tại
 
-    public void ExecuteAttack7()
+    public void ExecuteAttack()
     {
-        if (fireballPlayerSpawnPoint == null)
-            fireballPlayerSpawnPoint = transform;
-        GameObject fireball = Instantiate(fireballPlayerPrefab, fireballPlayerSpawnPoint.position, Quaternion.identity);
+        if (spawnPoint == null) spawnPoint = transform;
+
+        // Tìm player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+
+        // Tính hướng bay
+        Vector2 direction = (player.transform.position - spawnPoint.position).normalized;
+
+        // Tạo đạn
+        GameObject fireball = Instantiate(fireballPrefab, spawnPoint.position, Quaternion.identity);
         Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            // Hướng tấn công hướng đến player (giả sử có tag "Player")
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-            {
-                Vector2 direction = (playerObj.transform.position - fireballPlayerSpawnPoint.position).normalized;
-                rb.velocity = direction * fireballPlayerSpeed;
-            }
+            rb.velocity = direction * fireballSpeed;
         }
+
+        Destroy(fireball, 5f); // Tự hủy sau 5s
     }
 }
