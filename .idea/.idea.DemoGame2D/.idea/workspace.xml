@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="afb572bf-73d8-4d46-96a2-6284e81c6c08" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoGame2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DemoGame2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Bullet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/BulletPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/BulletPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerShooting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/SceneTransitionOnCollision.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/SceneTransitionOnCollision.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TaiNguyen/NguyenDat/Script/HealthSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TaiNguyen/NguyenDat/Script/HealthSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

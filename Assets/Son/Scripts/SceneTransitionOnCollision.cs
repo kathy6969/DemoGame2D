@@ -12,7 +12,6 @@ public class SceneTransitionOnCollision : MonoBehaviour
     // Kiểm tra va chạm với đối tượng có tag "Finish"
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        // Kiểm tra nếu đối tượng va chạm có tag "Finish"
         if (collider.gameObject.CompareTag("Finish"))
         {
             // Chuyển sang scene tiếp theo trong danh sách

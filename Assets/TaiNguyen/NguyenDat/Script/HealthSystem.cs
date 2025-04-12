@@ -6,14 +6,13 @@ public class HealthSystem : MonoBehaviour
 {
     public float MaxHealth, TotalHealth;
     [SerializeField] FloatingHealbar Healbar;
-
     public float invincibleTime = 1.5f; // Thời gian bất tử sau khi nhận sát thương
     public bool isInvincible = false;  // Trạng thái bất tử
     private DebuffSystem debuffSystem;
 
     void Start()
     {
-        Healbar = GetComponentInChildren<FloatingHealbar>();
+        Healbar = GetComponentInChildren<FloatingHealbar>(); 
         TotalHealth = MaxHealth;
         Healbar.UpdateHealbar(TotalHealth, MaxHealth);
         debuffSystem = GetComponent<DebuffSystem>();

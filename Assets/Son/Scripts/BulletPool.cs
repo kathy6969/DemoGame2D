@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    public static BulletPool Instance; // Singleton để dễ truy cập
+    public static BulletPool Instance; // Singleton
 
     public Bullet bulletPrefab;
     public int poolSize = 10;
     private Queue<Bullet> bulletPool = new Queue<Bullet>();
-
-    private Transform playerTransform; // Tham chiếu đến Player
 
     void Awake()
     {
@@ -18,16 +16,9 @@ public class BulletPool : MonoBehaviour
 
     void Start()
     {
-        playerTransform = GameObject.FindWithTag("Player").transform; // Tìm Player
-        if (playerTransform == null)
-        {
-            Debug.LogError("Không tìm thấy Player! Hãy đảm bảo Player có tag 'Player'");
-            return;
-        }
-
         for (int i = 0; i < poolSize; i++)
         {
-            Bullet bullet = Instantiate(bulletPrefab, playerTransform);
+            Bullet bullet = Instantiate(bulletPrefab, transform); // Đặt viên đạn là con của BulletPool
             bullet.gameObject.SetActive(false);
             bulletPool.Enqueue(bullet);
         }
@@ -42,10 +33,10 @@ public class BulletPool : MonoBehaviour
         }
         else
         {
-            bullet = Instantiate(bulletPrefab, playerTransform);
+            bullet = Instantiate(bulletPrefab, transform); // Đặt viên đạn là con của BulletPool
         }
 
-        bullet.transform.SetParent(playerTransform); // Đặt viên đạn là con của Player
+        bullet.transform.SetParent(transform); // Đảm bảo viên đạn vẫn là con của BulletPool
         bullet.gameObject.SetActive(true);
         return bullet;
     }
@@ -53,7 +44,7 @@ public class BulletPool : MonoBehaviour
     public void ReturnBullet(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
-        bullet.transform.SetParent(playerTransform); // Đảm bảo viên đạn về Player khi trở lại pool
+        bullet.transform.SetParent(transform); // Đặt viên đạn trở lại BulletPool
         bulletPool.Enqueue(bullet);
     }
 }
