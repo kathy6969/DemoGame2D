@@ -3137,38 +3137,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1301489832747398435, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.626499
-      objectReference: {fileID: 0}
-    - target: {fileID: 1301489832747398435, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.626499
-      objectReference: {fileID: 0}
-    - target: {fileID: 1301489832747398435, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.626499
-      objectReference: {fileID: 0}
-    - target: {fileID: 1301489832747398435, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1301489832747398435, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.63
-      objectReference: {fileID: 0}
     - target: {fileID: 2250755319525564523, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1634087756}
-    - target: {fileID: 3806489948804597689, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: spawnPoint
-      value: 
-      objectReference: {fileID: 801911648}
-    - target: {fileID: 3806489948804597689, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: fireballPrefab
-      value: 
-      objectReference: {fileID: 6913046089273514113, guid: 3d195d4ce4d756149ba2254627ee0874, type: 3}
     - target: {fileID: 6711651836184745972, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01

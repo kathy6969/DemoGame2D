@@ -25,8 +25,8 @@ Transform:
   m_GameObject: {fileID: 3186268200857142527}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.32, y: 0.57, z: 0}
-  m_LocalScale: {x: 0.59695, y: 0.59695, z: 0.59695}
+  m_LocalPosition: {x: 1.8, y: 0.63, z: 0}
+  m_LocalScale: {x: 0.626499, y: 0.626499, z: 0.626499}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6711651836184745972}
@@ -257,12 +257,10 @@ GameObject:
   - component: {fileID: 2705848280447727006}
   - component: {fileID: 2250755319525564523}
   - component: {fileID: 3789455258536613555}
-  - component: {fileID: 6145775677678430547}
-  - component: {fileID: 3806489948804597689}
   - component: {fileID: 5992771989330864600}
   - component: {fileID: 2698999819945862929}
   - component: {fileID: 5424854831164989666}
-  - component: {fileID: 4497375522808761753}
+  - component: {fileID: 1153003606129621947}
   m_Layer: 0
   m_Name: boss
   m_TagString: boss
@@ -388,14 +386,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   flipCooldownDuration: 1
-  detectionRange: 20
-  attackRange: 2
+  detectionRange: 10
+  attackRange: 3.04
   chaseSpeed: 3
   attackCooldown: 7
   ultimateAttackDuration: 5
-  teleportCooldown: 7
-  teleportMinDistance: 4
-  teleportMaxDistance: 20
+  teleportCooldown: 9.46
+  teleportMinDistance: 4.48
+  teleportMaxDistance: 10
   attackMoveSpeed: 3
 --- !u!50 &3789455258536613555
 Rigidbody2D:
@@ -424,36 +422,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6145775677678430547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7604421490454731009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e356c93088c93ea43961cde1747ad1a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletonPrefab: {fileID: 0}
-  skeletonCount: 3
-  skeletonSpawnOffsetX: 1
---- !u!114 &3806489948804597689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7604421490454731009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4111df6015adb4c89a8f78f226ddaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballPlayerPrefab: {fileID: 6913046089273514113, guid: 3d195d4ce4d756149ba2254627ee0874, type: 3}
-  fireballPlayerSpeed: 7
-  fireballPlayerSpawnPoint: {fileID: 1301489832747398435}
 --- !u!114 &5992771989330864600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,8 +468,8 @@ MonoBehaviour:
   fireOrbPrefab: {fileID: 7578667131976207286, guid: 0d8ccbe896c088c4791b750adcd135cd, type: 3}
   orbCount: 6
   orbRadius: 1.5
---- !u!70 &4497375522808761753
-CapsuleCollider2D:
+--- !u!61 &1153003606129621947
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -532,9 +500,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14082646, y: -0.8571464}
-  m_Size: {x: 1.1735911, y: 1.4365976}
-  m_Direction: 0
+  m_Offset: {x: -0.14107776, y: -1.1286002}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6, y: 6}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2034497, y: 1.1329124}
+  m_EdgeRadius: 0
 --- !u!1 &8078479056488680340
 GameObject:
   m_ObjectHideFlags: 0

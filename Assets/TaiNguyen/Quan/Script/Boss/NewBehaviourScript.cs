@@ -23,7 +23,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     public float attackRange = 2f;             // Khoảng cách đủ để tấn công
     public float chaseSpeed = 3f;              // Tốc độ đuổi theo
     public float attackCooldown = 7f;
-    
+
     [Header("Ultimate Attack Settings")]
     public float ultimateAttackDuration = 5f;  // Tổng thời gian mỗi kiểu attack là 5 giây
 
@@ -164,21 +164,15 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
             case 4:
                 yield return StartCoroutine(Attack_FireOrbStraight());
                 break;
-            case 5:
-                yield return StartCoroutine(Attack_SummonSkeletons());
-                break;
             case 6:
                 yield return StartCoroutine(Attack_FireballsFromAbove());
                 break;
-            case 7:
-                yield return StartCoroutine(Attack_ShootFireball());
-                break;
+                // Loại bỏ Attack 5 và Attack 7
         }
 
         // Sau khi attack, reset các trạng thái và chuyển về Idle
         animator.SetBool("canAttack", false);
         animator.SetBool("isRunning", false);
-        animator.Play("Idle");  // Chuyển về trạng thái Idle (state có tên "Idle")
         animator.SetLayerWeight(1, 0);
 
         yield return new WaitForSeconds(attackCooldown);
@@ -187,10 +181,10 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         animator.SetBool("Idle", true);
     }
 
-    // Chọn kiểu tấn công ngẫu nhiên từ 1 đến 7
+    // Chọn kiểu tấn công ngẫu nhiên từ các kiểu: 1,2,3,4,6
     int ChooseAttackType()
     {
-        return Random.Range(1, 8);
+        return Random.Range(1, 6);
     }
 
     // --- Các kiểu Attack ---
@@ -241,21 +235,9 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         yield return new WaitForSeconds(4f);
     }
 
-    IEnumerator Attack_SummonSkeletons()
-    {
-        Debug.Log("Executing Summon Skeletons Attack (Attack 5)");
-        yield return new WaitForSeconds(3f);
-    }
-
     IEnumerator Attack_FireballsFromAbove()
     {
         Debug.Log("Executing Fireballs From Above Attack (Attack 6)");
-        yield return new WaitForSeconds(4f);
-    }
-
-    IEnumerator Attack_ShootFireball()
-    {
-        Debug.Log("Executing Shoot Fireball Attack (Attack 7)");
         yield return new WaitForSeconds(4f);
     }
 
