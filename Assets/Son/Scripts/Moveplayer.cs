@@ -35,10 +35,13 @@ public class PlayerController : MonoBehaviour
     // Ví dụ: DashManager.Instance.dashSlider.value và PlayerShooting.Shot
     // Nếu chưa có, bạn cần đảm bảo thêm hoặc điều chỉnh theo dự án của mình.
 
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -73,13 +76,15 @@ public class PlayerController : MonoBehaviour
         // Nếu không đang bắn (PlayerShooting.Shot false), cập nhật hướng quay
         if (PlayerShooting.Shot == false)
         {
-            if (moveInput > 0 && !facingRight)
+            if (moveInput > 0)
             {
                 Flip();
+                spriteRenderer.flipX = false;
             }
-            else if (moveInput < 0 && facingRight)
+            else if (moveInput < 0)
             {
                 Flip();
+                spriteRenderer.flipX = true;
             }
         }
     }
@@ -107,10 +112,20 @@ public class PlayerController : MonoBehaviour
     {
         isDashing = true;
         rb.velocity = Vector2.zero;  // Dừng lại trước khi dash
+        float dashDirection = 0;
 
         // Dựa vào hướng hiện tại của player để xác định vector dash
-        float dashDirection = facingRight ? 1f : -1f;
-        rb.AddForce(new Vector2(dashDirection * dashForce, 0), ForceMode2D.Impulse);
+        //float dashDirection = facingRight ? 1f : 0f;
+        //rb.AddForce(new Vector2(dashDirection * dashForce, 0), ForceMode2D.Impulse);
+        if (facingRight)
+        {
+            dashDirection = 1f;
+        }
+        else
+        {
+            dashDirection = -1f;
+        }
+        rb.AddForce(new Vector2( dashDirection * dashForce,0), ForceMode2D.Impulse);
 
         // Cập nhật thời gian dash
         lastDashTime = Time.time;
@@ -136,29 +151,29 @@ public class PlayerController : MonoBehaviour
     public void Flip()
     {
         facingRight = !facingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        //Vector3 scale = transform.localScale;
+        //scale.x *= -1;
+        //transform.localScale = scale;
 
-        // Nếu có gán playerCanvas, đặt lại localScale cho Canvas
-        if (playerCanvas != null)
-        {
-            playerCanvas.transform.localScale = Vector3.one;
-        }
+        //// Nếu có gán playerCanvas, đặt lại localScale cho Canvas
+        //if (playerCanvas != null)
+        //{
+        //    playerCanvas.transform.localScale = Vector3.one;
+        //}
     }
 
     /// <summary>
     /// Hàm RotateToDirection nếu cần chuyển hướng riêng cho các mục đích khác.
     /// </summary>
-    public void RotateToDirection(Vector2 direction)
-    {
-        if (direction.x > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (direction.x < 0 && facingRight)
-        {
-            Flip();
-        }
-    }
+    //public void RotateToDirection(Vector2 direction)
+    //{
+    //    if (direction.x > 0 && !facingRight)
+    //    {
+    //        Flip();
+    //    }
+    //    else if (direction.x < 0 && facingRight)
+    //    {
+    //        Flip();
+    //    }
+    //}
 }
