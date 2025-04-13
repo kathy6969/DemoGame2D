@@ -1,22 +1,45 @@
 ﻿using UnityEngine;
 
-public class Attack4_FireOrbStraight : MonoBehaviour
+public class EnemyShoot : MonoBehaviour
 {
-    public GameObject fireOrbStraightPrefab;
-    public float fireOrbStraightSpeed = 5f;
-    public Transform fireOrbSpawnPoint; // Nếu không gán, sử dụng vị trí của object chứa script
+    public GameObject bulletPrefab;       // Prefab của viên đạn
+    public Transform firePoint;           // Vị trí bắn ra (điểm spawn của viên đạn)
+    public float bulletSpeed = 5f;        // Tốc độ bay của đạn
+    public SpriteRenderer spriteRenderer; // Tham chiếu đến SpriteRenderer của enemy
 
-    public void ExecuteAttack4()
+    private Vector3 rightFirePos = new Vector3(1.47f, -1.40f, 0f);  // Khi nhìn phải
+    private Vector3 leftFirePos = new Vector3(-1.47f, -1.4055f, 0f);  // Khi nhìn trái
+
+    public void Shoot()
     {
-        if (fireOrbSpawnPoint == null)
-            fireOrbSpawnPoint = transform;
-        GameObject orb = Instantiate(fireOrbStraightPrefab, fireOrbSpawnPoint.position, Quaternion.identity);
-        Rigidbody2D rb = orb.GetComponent<Rigidbody2D>();
+        // Xác định hướng bắn dựa trên spriteRenderer.flipX.
+        float direction = (spriteRenderer != null && spriteRenderer.flipX) ? -1f : 1f;
+
+        // Đặt lại vị trí firePoint theo hướng nhìn
+        firePoint.localPosition = (direction == -1f) ? leftFirePos : rightFirePos;
+
+        // Xoay đạn nếu cần
+        Quaternion bulletRotation = (direction < 0) ? Quaternion.Euler(0f, 180f, 0f) : Quaternion.identity;
+
+        // Tạo đạn
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
+
+        // Thêm vận tốc cho đạn
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            // Hướng được quyết định dựa trên scale.x (flip) của object chứa script
-            Vector2 direction = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
-            rb.velocity = direction * fireOrbStraightSpeed;
+            rb.velocity = new Vector2(direction * bulletSpeed, 0f);
+        }
+
+        // Tự hủy sau 5 giây
+        Destroy(bullet, 5f);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Shoot();
         }
     }
 }

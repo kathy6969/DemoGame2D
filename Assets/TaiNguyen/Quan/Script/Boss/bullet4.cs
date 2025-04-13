@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 
-public class BulletSimple : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 5f;
     public float lifetime = 5f;
+
+    private Rigidbody2D rb;
 
     void Start()
     {
-        Destroy(gameObject, lifetime); // Tự hủy sau 5s
-    }
+        rb = GetComponent<Rigidbody2D>();
 
-    void Update()
-    {
-        transform.Translate(Vector2.right * speed * Time.deltaTime); // Bay thẳng theo trục X
+       
+
+        // Hủy đạn sau lifetime giây
+        Destroy(gameObject, lifetime);
     }
 }

@@ -264,9 +264,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df79772141c34b44a96ed38ef9883b95, type: 3}
---- !u!4 &801911648 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1301489832747398435, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+--- !u!212 &1180342890 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6082336848520050750, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
   m_PrefabInstance: {fileID: 8434018655964536283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1211472827
@@ -2972,7 +2972,7 @@ MonoBehaviour:
   bullet6: {fileID: 597997847059557703, guid: bd570a55d90d5e949822c1bed1126f88, type: 3}
   bullet7: {fileID: 6913046089273514113, guid: 3d195d4ce4d756149ba2254627ee0874, type: 3}
   bullet8: {fileID: 0}
-  firePoint: {fileID: 801911648}
+  firePoint: {fileID: 0}
   bulletSpeed: 10
 --- !u!4 &1400770642
 Transform:
@@ -3315,17 +3315,25 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1585580181}
-    - target: {fileID: 2250755319525564523, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: attackCooldown
-      value: 3
+    - target: {fileID: 4258629458664532519, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8
       objectReference: {fileID: 0}
+    - target: {fileID: 4258629458664532519, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5992771989330864600, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1180342890}
     - target: {fileID: 6711651836184745972, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.01
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6711651836184745972, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.02
+      value: -3.05
       objectReference: {fileID: 0}
     - target: {fileID: 6711651836184745972, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3362,10 +3370,6 @@ PrefabInstance:
     - target: {fileID: 7604421490454731009, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_Name
       value: boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 7604421490454731009, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

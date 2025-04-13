@@ -145,6 +145,10 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     IEnumerator HandleAttack()
     {
         isAttacking = true;
+
+        // Quay mặt về phía người chơi trước khi thực hiện attack
+        FlipTowardsPlayer();
+
         int attackType = ChooseAttackType();
         animator.SetInteger("attackType", attackType);
         animator.SetBool("canAttack", true);
@@ -164,7 +168,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
             case 4:
                 yield return StartCoroutine(Attack_FireOrbStraight());
                 break;
-            case 6:
+            case 5:
                 yield return StartCoroutine(Attack_FireballsFromAbove());
                 break;
                 // Loại bỏ Attack 5 và Attack 7
@@ -242,6 +246,17 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     }
 
     // --- Các hàm hỗ trợ ---
+    void FlipTowardsPlayer()
+    {
+        if (player == null) return;
+
+        float directionToPlayer = player.position.x - transform.position.x;
+        if (directionToPlayer > 0 && !facingRight)
+            Flip();
+        else if (directionToPlayer < 0 && facingRight)
+            Flip();
+    }
+
     void Flip(float moveDirection)
     {
         if (moveDirection > 0 && !facingRight)
@@ -253,22 +268,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (groundCheck != null)
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        if (siteCheck != null)
-            Gizmos.DrawWireSphere(siteCheck.position, siteCheckRadius);
-        if (player != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, detectionRange);
-        }
+        spriteRenderer.flipX = !facingRight;
     }
 }
