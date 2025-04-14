@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afb572bf-73d8-4d46-96a2-6284e81c6c08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoGame2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DemoGame2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/BulletPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/BulletPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 6.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cuong/Scenes/Map 6.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/GameObject.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/GameObject.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2 (1).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2 (1).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/Coin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/Coin.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/Moveplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/Moveplayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerHP.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerHP.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerShooting.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/SceneTransitionOnCollision.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/SceneTransitionOnCollision.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/TextCoin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/TextCoin.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TaiNguyen/NguyenDat/Script/HealthSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TaiNguyen/NguyenDat/Script/HealthSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,6 +107,7 @@
       <updated>1743175554558</updated>
       <workItem from="1743175557812" duration="1316000" />
       <workItem from="1743257919903" duration="1249000" />
+      <workItem from="1744622977701" duration="10445000" />
     </task>
     <servers />
   </component>

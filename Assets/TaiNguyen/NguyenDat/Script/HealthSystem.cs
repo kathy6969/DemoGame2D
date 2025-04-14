@@ -1,21 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float MaxHealth, TotalHealth;
+    public float MaxHealth=100, TotalHealth;
     [SerializeField] FloatingHealbar Healbar;
     public float invincibleTime = 1.5f; // Thời gian bất tử sau khi nhận sát thương
     public bool isInvincible = false;  // Trạng thái bất tử
     private DebuffSystem debuffSystem;
-
+    private SceneTransitionOnCollision sceneTransition;
+    
     void Start()
     {
+        //Debug.Log(transform.gameObject.tag);
         Healbar = GetComponentInChildren<FloatingHealbar>(); 
         TotalHealth = MaxHealth;
         Healbar.UpdateHealbar(TotalHealth, MaxHealth);
         debuffSystem = GetComponent<DebuffSystem>();
+        sceneTransition = FindObjectOfType<SceneTransitionOnCollision>();
+    }
+
+    private void FixedUpdate()
+    {
+        Healbar.UpdateHealbar(TotalHealth, MaxHealth);
     }
 
     public void DamageTake(float damage)
@@ -23,8 +32,6 @@ public class HealthSystem : MonoBehaviour
         if (isInvincible) return; // Nếu đang bất tử thì bỏ qua sát thương
 
         TotalHealth -= damage;
-        Healbar.UpdateHealbar(TotalHealth, MaxHealth);
-
         if (TotalHealth <= 0)
         {
             Die();
@@ -44,7 +51,14 @@ public class HealthSystem : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        if (transform.gameObject.tag == "Player")
+        {
+            sceneTransition.LoadCurrentScene();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     // 📌 Thêm hàm này để Fireball có thể gọi
     public void ApplyBurn(float burnPercentage, float duration)

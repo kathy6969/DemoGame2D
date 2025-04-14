@@ -23,9 +23,6 @@ public class PlayerHP : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        // Đặt máu ban đầu
-        currentHP = 80f;
         UpdateSlider();
     }
 

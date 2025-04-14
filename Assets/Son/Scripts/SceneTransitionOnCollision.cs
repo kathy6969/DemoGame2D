@@ -7,9 +7,12 @@ public class SceneTransitionOnCollision : MonoBehaviour
 {
     // Danh sách các scene muốn chuyển tới
     private List<string> scenesList = new List<string> { "Map 1","Map 2", "Map 3", "Map 4", "Map 5", "Map 6" };
-    private int currentSceneIndex = 0;
-
-    // Kiểm tra va chạm với đối tượng có tag "Finish"
+    private static int currentSceneIndex = 0;
+    private HealthSystem healthSystem;
+    void Start()
+    {
+        healthSystem = GetComponent<HealthSystem>();
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("Finish"))
@@ -24,9 +27,8 @@ public class SceneTransitionOnCollision : MonoBehaviour
     }
 
     // Hàm chuyển sang scene tiếp theo trong danh sách
-    private void LoadNextScene()
+    public void LoadNextScene()
     {
-        // Tăng chỉ mục của scene và đảm bảo không vượt quá số lượng trong danh sách
         currentSceneIndex = (currentSceneIndex + 1) % scenesList.Count;
 
         // Chuyển đến scene tiếp theo trong danh sách
@@ -36,18 +38,16 @@ public class SceneTransitionOnCollision : MonoBehaviour
         // Đảm bảo Player sẽ ở vị trí (0, 0, 0) sau khi chuyển scene
         StartCoroutine(WaitAndMovePlayer());
     }
-    private void LoadCurrentScene()
+    public void LoadCurrentScene()
     {
-        SceneManager.LoadScene(scenesList[currentSceneIndex]);
+        healthSystem.TotalHealth = healthSystem.MaxHealth;
+        
         StartCoroutine(WaitAndMovePlayer());
     }
     
     private IEnumerator WaitAndMovePlayer()
     {
-        // Đợi một khung hình để đảm bảo scene đã tải
         yield return null;
-
-        // Đặt Player về vị trí (0, 0, 0)
         transform.position = Vector3.zero;
     }
 }

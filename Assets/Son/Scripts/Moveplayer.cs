@@ -30,13 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool canDash;
     private bool isDashing = false;
     private float lastDashTime = 0f;
-
-    // Lưu ý: DashManager và PlayerShooting là các script/thành phần riêng.
-    // Ví dụ: DashManager.Instance.dashSlider.value và PlayerShooting.Shot
-    // Nếu chưa có, bạn cần đảm bảo thêm hoặc điều chỉnh theo dự án của mình.
-
     private SpriteRenderer spriteRenderer;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,7 +67,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isMoving", moveInput != 0);
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-        // Nếu không đang bắn (PlayerShooting.Shot false), cập nhật hướng quay
         if (PlayerShooting.Shot == false)
         {
             if (moveInput > 0)
@@ -85,6 +78,22 @@ public class PlayerController : MonoBehaviour
             {
                 Flip();
                 spriteRenderer.flipX = true;
+            }
+        }
+        else
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+
+            if (mousePos.x > transform.position.x)
+            {
+                Flip();
+                spriteRenderer.flipX = false; // Hướng phải
+            }
+            else if (mousePos.x < transform.position.x)
+            {
+                Flip();
+                spriteRenderer.flipX = true; // Hướng trái
             }
         }
     }
