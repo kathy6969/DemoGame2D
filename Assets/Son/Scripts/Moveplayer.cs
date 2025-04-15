@@ -122,11 +122,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         rb.velocity = Vector2.zero;  // Dừng lại trước khi dash
         float dashDirection = 0;
-
-        // Dựa vào hướng hiện tại của player để xác định vector dash
-        //float dashDirection = facingRight ? 1f : 0f;
-        //rb.AddForce(new Vector2(dashDirection * dashForce, 0), ForceMode2D.Impulse);
-        if (facingRight)
+        if (spriteRenderer.flipX==false)
         {
             dashDirection = 1f;
         }
@@ -135,14 +131,10 @@ public class PlayerController : MonoBehaviour
             dashDirection = -1f;
         }
         rb.AddForce(new Vector2( dashDirection * dashForce,0), ForceMode2D.Impulse);
-
-        // Cập nhật thời gian dash
         lastDashTime = Time.time;
 
         yield return new WaitForSeconds(dashTime);
         isDashing = false;
-
-        // Reset slider dash qua DashManager (nếu có)
         DashManager.Instance.ResetDash();
     }
 
@@ -152,37 +144,8 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         animator.SetBool("isJumping", !isGrounded);
     }
-
-    /// <summary>
-    /// Flip sẽ đảo ngược hướng của player. Sau khi flip, reset scale của Canvas về Vector3.one
-    /// để UI không bị lật theo.
-    /// </summary>
     public void Flip()
     {
         facingRight = !facingRight;
-        //Vector3 scale = transform.localScale;
-        //scale.x *= -1;
-        //transform.localScale = scale;
-
-        //// Nếu có gán playerCanvas, đặt lại localScale cho Canvas
-        //if (playerCanvas != null)
-        //{
-        //    playerCanvas.transform.localScale = Vector3.one;
-        //}
     }
-
-    /// <summary>
-    /// Hàm RotateToDirection nếu cần chuyển hướng riêng cho các mục đích khác.
-    /// </summary>
-    //public void RotateToDirection(Vector2 direction)
-    //{
-    //    if (direction.x > 0 && !facingRight)
-    //    {
-    //        Flip();
-    //    }
-    //    else if (direction.x < 0 && facingRight)
-    //    {
-    //        Flip();
-    //    }
-    //}
 }
