@@ -50,16 +50,25 @@ public class HealthSystem : MonoBehaviour
     }
 
     public void Die()
+{
+    if (transform.gameObject.tag == "Player")
     {
-        if (transform.gameObject.tag == "Player")
-        {
-            sceneTransition.LoadCurrentScene();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        sceneTransition.LoadCurrentScene();
     }
+    else
+    {
+        // Nếu object này là boss, gọi CotManager
+        if (gameObject.CompareTag("Enemy")) // 📌 Đảm bảo boss có tag "Boss"
+        {
+            CotManager cotManager = FindObjectOfType<CotManager>();
+            if (cotManager != null)
+            {
+                cotManager.OnBossDefeated();
+            }
+        }
+        Destroy(gameObject);
+    }
+}
     // 📌 Thêm hàm này để Fireball có thể gọi
     public void ApplyBurn(float burnPercentage, float duration)
     {

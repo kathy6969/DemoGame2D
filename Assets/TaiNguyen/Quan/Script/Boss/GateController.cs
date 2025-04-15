@@ -1,83 +1,71 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class GateController : MonoBehaviour
+public class CotManager : MonoBehaviour
 {
-    [Header("Cổng điều khiển")]
-    public GameObject gate1;
-    public GameObject gate2;
-    public GameObject boss; // Boss liên quan đến cổng này
+    [Header("Objects Setup")]
+    [SerializeField] private GameObject[] cotObjects;  // Object 1 và 3 (có tag "cot" và va chạm ban đầu)
+    [SerializeField] private GameObject[] hiddenObjects; // Object 2 và 4 (ẩn ban đầu)
 
-    private bool playerBetweenGates = false;
-    private bool bossDefeated = false;
-    private Collider2D gate1Collider;
-    private Collider2D gate2Collider;
+    [Header("Settings")]
+    [SerializeField] private float delayBeforeShow = 1f; // Thời gian đợi trước khi hiện 2,4
+
+    private bool isBossDefeated = false;
 
     void Start()
     {
-        // Lấy Collider của các cổng
-        gate1Collider = gate1.GetComponent<Collider2D>();
-        gate2Collider = gate2.GetComponent<Collider2D>();
-
-        // Mặc định mở cổng (isTrigger = true)
-        SetGatesTrigger(true);
-    }
-
-    void Update()
-    {
-        // Kiểm tra nếu boss đã bị tiêu diệt
-        if (!bossDefeated && boss == null)
+        // Đảm bảo object 2 và 4 ẩn lúc đầu
+        foreach (GameObject obj in hiddenObjects)
         {
-            bossDefeated = true;
-            DisableGatesPermanently();
+            obj.SetActive(false);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    // Gọi khi player chạm vào object có tag "cot"
+    public void OnCotTouched()
     {
-        if (other.CompareTag("Player"))
+        if (isBossDefeated) return; // Nếu boss đã chết, không làm gì
+
+        // Ẩn object 1 và 3
+        foreach (GameObject obj in cotObjects)
         {
-            if (IsBetweenGates(other.transform.position))
+            obj.SetActive(false);
+        }
+
+        // Sau 'delayBeforeShow' giây, hiện object 2 và 4
+        StartCoroutine(ShowHiddenObjectsAfterDelay());
+    }
+
+    private IEnumerator ShowHiddenObjectsAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeShow);
+
+        foreach (GameObject obj in hiddenObjects)
+        {
+            obj.SetActive(true);
+            // Kích hoạt va chạm nếu chưa có
+            if (obj.GetComponent<Collider2D>() != null)
             {
-                playerBetweenGates = true;
-                SetGatesTrigger(false); // Đóng cổng
+                obj.GetComponent<Collider2D>().enabled = true;
             }
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    // Gọi khi boss bị tiêu diệt
+    public void OnBossDefeated()
     {
-        if (other.CompareTag("Player") && playerBetweenGates)
+        isBossDefeated = true;
+
+        // Ẩn object 2 và 4
+        foreach (GameObject obj in hiddenObjects)
         {
-            playerBetweenGates = false;
-            if (!bossDefeated)
-            {
-                SetGatesTrigger(true); // Mở cổng nếu boss chưa chết
-            }
+            obj.SetActive(false);
         }
-    }
 
-    private bool IsBetweenGates(Vector2 position)
-    {
-        // Kiểm tra vị trí player có nằm giữa hai cổng không
-        float minX = Mathf.Min(gate1.transform.position.x, gate2.transform.position.x);
-        float maxX = Mathf.Max(gate1.transform.position.x, gate2.transform.position.x);
-        return position.x > minX && position.x < maxX;
-    }
-
-    private void SetGatesTrigger(bool isTrigger)
-    {
-        gate1Collider.isTrigger = isTrigger;
-        gate2Collider.isTrigger = isTrigger;
-    }
-
-    private void DisableGatesPermanently()
-    {
-        // Vô hiệu hóa hoàn toàn cổng sau khi boss chết
-        gate1Collider.enabled = false;
-        gate2Collider.enabled = false;
-
-        // Có thể thêm hiệu ứng hoặc ẩn cổng tùy ý
-        gate1.SetActive(false);
-        gate2.SetActive(false);
+        // Hiện lại object 1 và 3 nếu cần
+        // foreach (GameObject obj in cotObjects)
+        // {
+        //     obj.SetActive(true);
+        // }
     }
 }

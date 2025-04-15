@@ -24,6 +24,14 @@ public class SceneTransitionOnCollision : MonoBehaviour
         {
             LoadCurrentScene();
         }
+        
+          if (collider.CompareTag("cot"))
+            {
+                CotManager cotManager = FindObjectOfType<CotManager>();
+            cotManager.OnCotTouched();
+       
+        }
+
     }
 
     // Hàm chuyển sang scene tiếp theo trong danh sách

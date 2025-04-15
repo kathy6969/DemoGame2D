@@ -45,6 +45,20 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 
     void Start()
     {
+        // Tìm đối tượng player theo tag nếu chưa được gán từ Inspector
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogError("Không tìm thấy đối tượng có tag 'Player'. Hãy chắc chắn rằng đối tượng Player được gán tag 'Player'.");
+            }
+        }
+
         // Ẩn layer attack ban đầu (giả sử layer attack là layer 1)
         animator.SetLayerWeight(1, 0);
         siteCheckRadius *= 2f; // Nhân đôi bán kính của siteCheck
@@ -55,6 +69,16 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 
     void Update()
     {
+        // Nếu chưa tìm được player, thử tìm lại trong Update
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+        }
+
         if (player == null)
             return;
 
@@ -134,36 +158,36 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         Flip(direction.x);
     }
 
-  void TeleportToPlayer()
-{
-    // Kiểm tra nếu player đang ở trên không, thì tìm vị trí mặt đất gần nhất
-    RaycastHit2D groundHit = Physics2D.Raycast(
-        player.position, 
-        Vector2.down, 
-        Mathf.Infinity, 
-        groundLayer
-    );
-
-    Vector3 targetPos;
-    
-    if (groundHit.collider != null)
+    void TeleportToPlayer()
     {
+        // Kiểm tra nếu player đang ở trên không, thì tìm vị trí mặt đất gần nhất
+        RaycastHit2D groundHit = Physics2D.Raycast(
+            player.position,
+            Vector2.down,
+            Mathf.Infinity,
+            groundLayer
+        );
+
+        Vector3 targetPos;
+
+        if (groundHit.collider != null)
+        {
             Debug.Log("Tìm thấy đất tại: " + groundHit.point);
             // Teleport đến vị trí ngay trên mặt đất (có thể thêm offset nếu cần)
             targetPos = groundHit.point;
-        targetPos.y += 1.5f; // Nâng lên một chút để không bị kẹt vào đất
-    }
-    else
-    {
+            targetPos.y += 1.5f; // Nâng lên một chút để không bị kẹt vào đất
+        }
+        else
+        {
             Debug.LogError("Không tìm thấy đất! Kiểm tra Layer Ground hoặc Collider.");
             // Nếu không tìm thấy đất, teleport đến vị trí player (fallback)
             targetPos = player.position;
-    }
+        }
 
-    targetPos.z = transform.position.z; // Giữ nguyên trục Z
-    transform.position = targetPos;
-    Debug.Log("Teleported to ground position at " + targetPos);
-}
+        targetPos.z = transform.position.z; // Giữ nguyên trục Z
+        transform.position = targetPos;
+        Debug.Log("Teleported to ground position at " + targetPos);
+    }
 
     IEnumerator HandleAttack()
     {
@@ -194,7 +218,6 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
             case 5:
                 yield return StartCoroutine(Attack_FireballsFromAbove());
                 break;
-                // Loại bỏ Attack 5 và Attack 7
         }
 
         // Sau khi attack, reset các trạng thái và chuyển về Idle
@@ -208,7 +231,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         animator.SetBool("Idle", true);
     }
 
-    // Chọn kiểu tấn công ngẫu nhiên từ các kiểu: 1,2,3,4,6
+    // Chọn kiểu tấn công ngẫu nhiên từ các kiểu: 1,2,3,4,5
     int ChooseAttackType()
     {
         return Random.Range(1, 6);
@@ -258,13 +281,12 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
     IEnumerator Attack_FireOrbStraight()
     {
         Debug.Log("Executing Fire Orb Straight Attack (Attack 4)");
-        // Gọi hàm Attack4_FireOrbStraight thông qua Animation Event hoặc trực tiếp từ code tùy thiết kế.
         yield return new WaitForSeconds(4f);
     }
 
     IEnumerator Attack_FireballsFromAbove()
     {
-        Debug.Log("Executing Fireballs From Above Attack (Attack 6)");
+        Debug.Log("Executing Fireballs From Above Attack (Attack 5)");
         yield return new WaitForSeconds(4f);
     }
 
@@ -290,8 +312,7 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 
     void Flip()
     {
-         facingRight = !facingRight;
-
+        facingRight = !facingRight;
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * (facingRight ? 1 : -1);
         transform.localScale = scale;

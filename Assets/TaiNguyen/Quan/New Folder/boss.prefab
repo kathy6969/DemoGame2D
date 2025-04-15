@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338c87d6801ffe14995e19acc705c40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 3862369835771496049, guid: b222b2fb0e5af8340b03e53cb4ecdade, type: 3}
   animator: {fileID: 2705848280447727006}
   rb: {fileID: 3789455258536613555}
   spriteRenderer: {fileID: 6082336848520050750}
