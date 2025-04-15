@@ -1547,13 +1547,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2408629751427586139, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: detectionRadius
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.319687
+      value: -8.97
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.011182785
+      value: -0.41
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50050,11 +50054,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1945964356279328298, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.8106918
+      value: 2.63
       objectReference: {fileID: 0}
     - target: {fileID: 1945964356279328298, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.31050873
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 1945964356279328298, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50096,6 +50100,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7172751891040566924, guid: aa9a577c02aa005428370bf516664f18, type: 3}
+      propertyPath: attackRange
+      value: 10.08
+      objectReference: {fileID: 0}
     - target: {fileID: 9073132659171640632, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_Name
       value: Mage boss
@@ -50130,13 +50138,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2408629751427586139, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: detectionRadius
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.923752
+      value: 11.34
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9689617
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.z

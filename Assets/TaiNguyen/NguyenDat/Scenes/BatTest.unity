@@ -455,18 +455,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Homo
       objectReference: {fileID: 0}
-    - target: {fileID: 2623995947356968763, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780365645802619438, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
-      propertyPath: hitLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5540463154703321937, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
-      propertyPath: obstacleLayer.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5741529312220040521, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.0875864
@@ -506,6 +494,14 @@ PrefabInstance:
     - target: {fileID: 5741529312220040521, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097285060078204137, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5586185
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097285060078204137, guid: 7abe88884b3fcf140bbc03e2ac151cc7, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.40243
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -836,7 +832,7 @@ GameObject:
   - component: {fileID: 154456667}
   - component: {fileID: 154456669}
   - component: {fileID: 154456668}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 327134587}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 634034455}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2041,7 +2037,7 @@ GameObject:
   - component: {fileID: 1221872149}
   - component: {fileID: 1221872151}
   - component: {fileID: 1221872150}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Healbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2142,7 +2138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1475925361}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2181,7 +2177,7 @@ GameObject:
   - component: {fileID: 1480949195}
   - component: {fileID: 1480949196}
   - component: {fileID: 1480949197}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2517,7 +2513,7 @@ GameObject:
   - component: {fileID: 1742595930}
   - component: {fileID: 1742595929}
   - component: {fileID: 1742595928}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3316,7 +3312,7 @@ GameObject:
   - component: {fileID: 1975312112}
   - component: {fileID: 1975312114}
   - component: {fileID: 1975312113}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3399,7 +3395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &2107816333
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3468,7 +3464,7 @@ Transform:
   m_GameObject: {fileID: 2107816332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.31, y: -0.71, z: -10}
+  m_LocalPosition: {x: -3.11, y: -0.24, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3611,11 +3607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163564076895502811, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.502
       objectReference: {fileID: 0}
     - target: {fileID: 3163564076895502811, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7172751891040566924, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: player
@@ -3627,7 +3623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9073132659171640632, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

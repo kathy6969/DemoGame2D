@@ -313,7 +313,7 @@ MonoBehaviour:
   MaxHealth: 200
   TotalHealth: 0
   Healbar: {fileID: 8693642592113354943}
-  invincibleTime: 1.5
+  invincibleTime: 0.75
   isInvincible: 0
 --- !u!1001 &3094619009679716269
 PrefabInstance:

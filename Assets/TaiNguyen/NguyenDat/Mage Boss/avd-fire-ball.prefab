@@ -165,7 +165,7 @@ MonoBehaviour:
   speed: 5
   burnPercentage: 2
   burnDuration: 2.5
-  lifetime: 5
+  lifetime: 3
 --- !u!114 &-6687473935233117545
 MonoBehaviour:
   m_ObjectHideFlags: 0

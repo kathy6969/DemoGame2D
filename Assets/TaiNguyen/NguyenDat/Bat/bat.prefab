@@ -586,7 +586,7 @@ MonoBehaviour:
   MaxHealth: 25
   TotalHealth: 0
   Healbar: {fileID: 8588700656033802273}
-  invincibleTime: 1.5
+  invincibleTime: 0.75
   isInvincible: 0
 --- !u!114 &5746964526525691862
 MonoBehaviour:
