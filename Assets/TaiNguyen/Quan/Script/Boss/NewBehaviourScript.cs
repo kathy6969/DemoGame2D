@@ -134,13 +134,36 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
         Flip(direction.x);
     }
 
-    void TeleportToPlayer()
+  void TeleportToPlayer()
+{
+    // Kiểm tra nếu player đang ở trên không, thì tìm vị trí mặt đất gần nhất
+    RaycastHit2D groundHit = Physics2D.Raycast(
+        player.position, 
+        Vector2.down, 
+        Mathf.Infinity, 
+        groundLayer
+    );
+
+    Vector3 targetPos;
+    
+    if (groundHit.collider != null)
     {
-        Vector3 targetPos = player.position;
-        targetPos.z = transform.position.z;
-        transform.position = targetPos;
-        Debug.Log("Teleported to player at " + targetPos);
+            Debug.Log("Tìm thấy đất tại: " + groundHit.point);
+            // Teleport đến vị trí ngay trên mặt đất (có thể thêm offset nếu cần)
+            targetPos = groundHit.point;
+        targetPos.y += 1.5f; // Nâng lên một chút để không bị kẹt vào đất
     }
+    else
+    {
+            Debug.LogError("Không tìm thấy đất! Kiểm tra Layer Ground hoặc Collider.");
+            // Nếu không tìm thấy đất, teleport đến vị trí player (fallback)
+            targetPos = player.position;
+    }
+
+    targetPos.z = transform.position.z; // Giữ nguyên trục Z
+    transform.position = targetPos;
+    Debug.Log("Teleported to ground position at " + targetPos);
+}
 
     IEnumerator HandleAttack()
     {
@@ -267,7 +290,10 @@ public class BossAI_WithAttackAndMovement : MonoBehaviour
 
     void Flip()
     {
-        facingRight = !facingRight;
-        spriteRenderer.flipX = !facingRight;
+         facingRight = !facingRight;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * (facingRight ? 1 : -1);
+        transform.localScale = scale;
     }
 }

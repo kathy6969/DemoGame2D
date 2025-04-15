@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &159973675 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8180845231726741003, guid: 02bf5e05e0b73fc42a95cf813d406476, type: 3}
+  m_PrefabInstance: {fileID: 1412743773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &300670702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,7 +2743,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 1256206661}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 35086c7a07a9f3a4a9808b8f0c221a8f, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2835,6 +2840,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1371214991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7604421490454731009, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+  m_PrefabInstance: {fileID: 2000174938040677104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1371215003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371214991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ada10bfdfac774a8c451deae3ac6a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1400770640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2866,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400770642}
-  - component: {fileID: 1400770641}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -2852,26 +2873,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1400770641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400770640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f8d33d41910204f8f62fcb0c1518cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet2: {fileID: 7578667131976207286, guid: 243cdd69ecceba34894fae678d08ee12, type: 3}
-  bullet4: {fileID: 7808453826805463894, guid: 6632c9ac9333c8e4b921b7aaf727ba7f, type: 3}
-  bullet5: {fileID: 0}
-  bullet6: {fileID: 597997847059557703, guid: bd570a55d90d5e949822c1bed1126f88, type: 3}
-  bullet7: {fileID: 6913046089273514113, guid: 3d195d4ce4d756149ba2254627ee0874, type: 3}
-  bullet8: {fileID: 0}
-  firePoint: {fileID: 0}
-  bulletSpeed: 10
 --- !u!4 &1400770642
 Transform:
   m_ObjectHideFlags: 0
@@ -3301,6 +3302,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2250755319525564523, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 159973675}
+    - target: {fileID: 4258629458664532519, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258629458664532519, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.85
+      objectReference: {fileID: 0}
     - target: {fileID: 6622629710348046763, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3353,14 +3366,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: boss
       objectReference: {fileID: 0}
-    - target: {fileID: 7604421490454731009, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
-      propertyPath: m_TagString
-      value: boss
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7604421490454731009, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1371215003}
   m_SourcePrefab: {fileID: 100100000, guid: b16ef2419ce8cd54ea9d6b858c4eac88, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

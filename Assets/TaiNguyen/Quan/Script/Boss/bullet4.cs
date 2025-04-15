@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class FireOrb : MonoBehaviour
 {
     public float speed = 5f;
-    public float lifetime = 5f;
+    private Vector2 moveDirection;
 
-    private Rigidbody2D rb;
-
-    void Start()
+    public void Launch(Vector2 direction)
     {
-        rb = GetComponent<Rigidbody2D>();
+        moveDirection = direction.normalized;
 
-       
+        // Lật sprite nếu bắn sang trái
+        if (direction.x < 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+    }
 
-        // Hủy đạn sau lifetime giây
-        Destroy(gameObject, lifetime);
+    void Update()
+    {
+        transform.Translate(moveDirection * speed * Time.deltaTime);
     }
 }
