@@ -228,7 +228,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.001278609, y: -0.4269424}
+  m_Offset: {x: 0.034648895, y: -0.44412506}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -239,7 +239,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3734926, y: 0.022269815}
+  m_Size: {x: 0.65465546, y: 0.05663514}
   m_EdgeRadius: 0
 --- !u!95 &4321653041551260990
 Animator:
@@ -290,9 +290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 386702791965574949, guid: 149216adfd340d24baaf5baa3bc7cd96, type: 3}
-  player: {fileID: 3334486134573554748, guid: ba0d4977202c7694fa20f918c3f501ac, type: 3}
+  player: {fileID: 0}
   fireballDamage: 20
-  attackRange: 10
+  attackRange: 15
   FirePoint: {fileID: 3027912136257764779}
   fireballCount: 10
   fireballSpacing: 3

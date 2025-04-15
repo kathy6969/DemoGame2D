@@ -1234,7 +1234,7 @@ GameObject:
   - component: {fileID: 878866180}
   - component: {fileID: 878866179}
   - component: {fileID: 878866178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject (1)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -1549,15 +1549,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2408629751427586139, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: detectionRadius
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852951376926448242, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.97
+      value: -9.13
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1590,6 +1594,26 @@ PrefabInstance:
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561919146354431388, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_Size.y
+      value: 0.01691246
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561919146354431388, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.4950838
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833348134064299551, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2263049
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833348134064299551, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.16017622
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833348134064299551, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1787,7 +1811,7 @@ GameObject:
   - component: {fileID: 1169216638}
   - component: {fileID: 1169216637}
   - component: {fileID: 1169216636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject (2)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -48811,7 +48835,7 @@ GameObject:
   - component: {fileID: 1344427978}
   - component: {fileID: 1344427977}
   - component: {fileID: 1344427976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -49180,7 +49204,7 @@ GameObject:
   - component: {fileID: 1398263177}
   - component: {fileID: 1398263176}
   - component: {fileID: 1398263175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject (3)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -49557,7 +49581,7 @@ GameObject:
   - component: {fileID: 1520787664}
   - component: {fileID: 1520787663}
   - component: {fileID: 1520787662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject (5)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -50100,10 +50124,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7172751891040566924, guid: aa9a577c02aa005428370bf516664f18, type: 3}
-      propertyPath: attackRange
-      value: 10.08
-      objectReference: {fileID: 0}
     - target: {fileID: 9073132659171640632, guid: aa9a577c02aa005428370bf516664f18, type: 3}
       propertyPath: m_Name
       value: Mage boss
@@ -50140,7 +50160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2408629751427586139, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: detectionRadius
-      value: 7
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852951376926448242, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4037118889458339924, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50182,6 +50206,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7833348134064299551, guid: 9d14cc58f42687245aabe5e8d8e4ac55, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50206,7 +50234,7 @@ GameObject:
   - component: {fileID: 2126657394}
   - component: {fileID: 2126657393}
   - component: {fileID: 2126657392}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject (4)
   m_TagString: Platform
   m_Icon: {fileID: 0}

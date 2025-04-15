@@ -10,7 +10,7 @@ public class BossStateMachine : MonoBehaviour
     private AttackState attackState;
 
     public GameObject fireballPrefab;
-    public Transform player;
+    [SerializeField] Transform player;
     public int fireballDamage = 10;
     public float attackRange = 15f; // Khoảng cách để boss chuyển sang trạng thái tấn công
     private AdvFireBall fireballScript;
@@ -22,6 +22,10 @@ public class BossStateMachine : MonoBehaviour
 
     private void Start()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform; // Tìm người chơi
+        }
         teleportState = new TeleportState(this);
         attackState = new AttackState(this, fireballPrefab, player, fireballDamage);
         ChangeState(teleportState);

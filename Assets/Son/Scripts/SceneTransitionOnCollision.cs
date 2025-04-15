@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class SceneTransitionOnCollision : MonoBehaviour
 {
     // Danh sách các scene muốn chuyển tới
-    private List<string> scenesList = new List<string> { "Map 1","Map 2", "Map 3", "Map 4", "Map 5", "Map 6" };
+    private List<string> scenesList = new List<string> { "Map 1","Map 2", "Map 3", "Map 4", "Map 5", "Map 6","Map 7" };
     private static int currentSceneIndex = 0;
     private HealthSystem healthSystem;
     void Start()
