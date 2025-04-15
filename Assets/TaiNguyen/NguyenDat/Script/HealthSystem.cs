@@ -6,7 +6,7 @@ public class HealthSystem : MonoBehaviour
 {
     public float MaxHealth, TotalHealth;
     [SerializeField] FloatingHealbar Healbar;
-    public float invincibleTime = 1.5f; // Thời gian bất tử sau khi nhận sát thương
+    public float invincibleTime = 0.75f; // Thời gian bất tử sau khi nhận sát thương
     public bool isInvincible = false;  // Trạng thái bất tử
     private DebuffSystem debuffSystem;
 
