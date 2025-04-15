@@ -6,12 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="afb572bf-73d8-4d46-96a2-6284e81c6c08" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DemoGame2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DemoGame2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Player_Idle_0 (1) 2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/BulletPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/BulletPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/PlayerShooting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/SceneTransitionOnCollision.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/SceneTransitionOnCollision.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TaiNguyen/NguyenDat/Script/HealthSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TaiNguyen/NguyenDat/Script/HealthSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Son/Scripts/Moveplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Son/Scripts/Moveplayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +98,8 @@
       <updated>1743175554558</updated>
       <workItem from="1743175557812" duration="1316000" />
       <workItem from="1743257919903" duration="1249000" />
+      <workItem from="1744622977701" duration="10445000" />
+      <workItem from="1744700410870" duration="819000" />
     </task>
     <servers />
   </component>

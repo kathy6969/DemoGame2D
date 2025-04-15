@@ -5,7 +5,7 @@ public class TextCoin : MonoBehaviour
 {
     public static TextCoin Instance { get; private set; }
 
-    private int totalCoins = 0;
+    public int totalCoins = 0;
     public Text coinText; // Dùng Text thay vì TextMeshProUGUI
 
     private void Awake()

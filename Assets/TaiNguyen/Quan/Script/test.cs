@@ -1,56 +1,46 @@
 ﻿using UnityEngine;
 
-public class AttackTester : MonoBehaviour
+public class BossAttack4 : MonoBehaviour
 {
-    public GameObject bullet2;
-    public GameObject bullet4;
-    public GameObject bullet5;
-    public GameObject bullet6;
-    public GameObject bullet7;
-    public GameObject bullet8;
+    public GameObject fireOrbPrefab;   // Prefab của viên đạn
+    public Transform firePoint;        // Vị trí bắt đầu bắn viên đạn
+    public float attackCooldown = 2f;  // Thời gian chờ giữa các lần sử dụng attack
 
-    public Transform firePoint;
-
-    public float bulletSpeed = 10f;
+    private float nextAttackTime = 0f;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        // Kiểm tra khi bấm phím (ở đây là phím "F" để thực hiện Attack 4)
+        if (Input.GetKeyDown(KeyCode.F) && Time.time >= nextAttackTime)
         {
-            Shoot(bullet2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            Shoot(bullet4);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            Shoot(bullet5);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            Shoot(bullet6);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            Shoot(bullet7);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            Shoot(bullet8);
+            // Thực hiện Attack 4
+            Attack4();
+
+            // Cập nhật thời gian cooldown
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 
-    void Shoot(GameObject bulletPrefab)
+    void Attack4()
     {
-        if (bulletPrefab == null || firePoint == null) return;
+        // Tạo viên đạn và gọi chức năng launch
+        GameObject orb = Instantiate(fireOrbPrefab, firePoint.position, Quaternion.identity);
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        // Xác định hướng viên đạn bay dựa trên hướng nhìn của Boss
+        Vector2 direction = Vector2.zero;
+
+        if (transform.localScale.x > 0)  // Boss nhìn sang phải
         {
-            rb.velocity = firePoint.right * bulletSpeed;
+            direction = Vector2.right;
         }
-        Destroy(bullet, 5f); // tự huỷ sau 5 giây
+        else if (transform.localScale.x < 0)  // Boss nhìn sang trái
+        {
+            direction = Vector2.left;
+        }
+
+        // Bắn viên đạn theo hướng tính toán
+        orb.GetComponent<FireOrb>().Launch(direction);
+
+        // Optionally: Add a visual or animation effect to show the attack
     }
 }

@@ -9,6 +9,9 @@ TagManager:
   - die
   - Platform
   - Enemy
+  - ground
+  - boss
+  - cot
   layers:
   - Default
   - TransparentFX

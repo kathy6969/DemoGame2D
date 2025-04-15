@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
 
-public class BulletSimple : MonoBehaviour
+public class FireOrb : MonoBehaviour
 {
-    public float speed = 10f;
-    public float lifetime = 5f;
+    public float speed = 5f;
+    private Vector2 moveDirection;
 
-    void Start()
+    public void Launch(Vector2 direction)
     {
-        Destroy(gameObject, lifetime); // Tự hủy sau 5s
+        moveDirection = direction.normalized;
+
+        // Lật sprite nếu bắn sang trái
+        if (direction.x < 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
     }
 
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime); // Bay thẳng theo trục X
+        transform.Translate(moveDirection * speed * Time.deltaTime);
     }
 }
