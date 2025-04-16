@@ -58,14 +58,14 @@ public class HealthSystem : MonoBehaviour
     else
     {
         // Nếu object này là boss, gọi CotManager
-        if (gameObject.CompareTag("Enemy")) // 📌 Đảm bảo boss có tag "Boss"
-        {
-            CotManager cotManager = FindObjectOfType<CotManager>();
-            if (cotManager != null)
-            {
-                cotManager.OnBossDefeated();
-            }
-        }
+        //if (gameObject.CompareTag("Enemy")) // 📌 Đảm bảo boss có tag "Boss"
+        //{
+        //    CotManager cotManager = FindObjectOfType<CotManager>();
+        //    if (cotManager != null)
+        //    {
+        //        cotManager.OnBossDefeated();
+        //    }
+        //}
         Destroy(gameObject);
     }
 }

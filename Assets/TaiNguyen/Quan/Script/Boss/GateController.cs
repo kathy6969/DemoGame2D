@@ -1,71 +1,71 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Tilemaps;
 
-public class CotManager : MonoBehaviour
+public class BossChecker : MonoBehaviour
 {
-    [Header("Objects Setup")]
-    [SerializeField] private GameObject[] cotObjects;  // Object 1 và 3 (có tag "cot" và va chạm ban đầu)
-    [SerializeField] private GameObject[] hiddenObjects; // Object 2 và 4 (ẩn ban đầu)
+    [Header("Cài đặt Boss")]
+    [SerializeField] private string bossTag = "Boss"; // Tag của boss
+    [SerializeField] private float checkRate = 0.5f; // Tần suất kiểm tra (giây)
 
-    [Header("Settings")]
-    [SerializeField] private float delayBeforeShow = 1f; // Thời gian đợi trước khi hiện 2,4
+    [Header("Thay đổi Tilemap")]
+    [SerializeField] private Tilemap targetTilemap;
+    [SerializeField] private Collider2D targetCollider;
 
-    private bool isBossDefeated = false;
+    private Rigidbody2D tilemapRigidbody;
+    private float checkTimer;
 
-    void Start()
+    private void Start()
     {
-        // Đảm bảo object 2 và 4 ẩn lúc đầu
-        foreach (GameObject obj in hiddenObjects)
+        // Kiểm tra component
+        if (targetTilemap != null)
         {
-            obj.SetActive(false);
-        }
-    }
-
-    // Gọi khi player chạm vào object có tag "cot"
-    public void OnCotTouched()
-    {
-        if (isBossDefeated) return; // Nếu boss đã chết, không làm gì
-
-        // Ẩn object 1 và 3
-        foreach (GameObject obj in cotObjects)
-        {
-            obj.SetActive(false);
-        }
-
-        // Sau 'delayBeforeShow' giây, hiện object 2 và 4
-        StartCoroutine(ShowHiddenObjectsAfterDelay());
-    }
-
-    private IEnumerator ShowHiddenObjectsAfterDelay()
-    {
-        yield return new WaitForSeconds(delayBeforeShow);
-
-        foreach (GameObject obj in hiddenObjects)
-        {
-            obj.SetActive(true);
-            // Kích hoạt va chạm nếu chưa có
-            if (obj.GetComponent<Collider2D>() != null)
+            tilemapRigidbody = targetTilemap.GetComponent<Rigidbody2D>();
+            if (tilemapRigidbody == null)
             {
-                obj.GetComponent<Collider2D>().enabled = true;
+                Debug.LogWarning("Tilemap không có Rigidbody2D, sẽ không thể thay đổi thành Dynamic");
             }
         }
+
+        checkTimer = checkRate;
     }
 
-    // Gọi khi boss bị tiêu diệt
-    public void OnBossDefeated()
+    private void Update()
     {
-        isBossDefeated = true;
-
-        // Ẩn object 2 và 4
-        foreach (GameObject obj in hiddenObjects)
+        checkTimer -= Time.deltaTime;
+        if (checkTimer <= 0f)
         {
-            obj.SetActive(false);
+            CheckBoss();
+            checkTimer = checkRate;
+        }
+    }
+
+    private void CheckBoss()
+    {
+        // Tìm boss theo tag
+        GameObject boss = GameObject.FindWithTag(bossTag);
+
+        // Nếu không tìm thấy boss
+        if (boss == null)
+        {
+            ActivateChanges();
+            enabled = false; // Tắt script sau khi kích hoạt thay đổi
+        }
+    }
+
+    private void ActivateChanges()
+    {
+        // Thay đổi Rigidbody thành Dynamic
+        if (tilemapRigidbody != null)
+        {
+            tilemapRigidbody.bodyType = RigidbodyType2D.Dynamic;
+            Debug.Log("Đã thay đổi Tilemap sang Dynamic");
         }
 
-        // Hiện lại object 1 và 3 nếu cần
-        // foreach (GameObject obj in cotObjects)
-        // {
-        //     obj.SetActive(true);
-        // }
+        // Bật Is Trigger cho collider
+        if (targetCollider != null)
+        {
+            targetCollider.isTrigger = true;
+            Debug.Log("Đã bật Is Trigger cho collider");
+        }
     }
 }

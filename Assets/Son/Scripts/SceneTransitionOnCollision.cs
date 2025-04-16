@@ -25,12 +25,12 @@ public class SceneTransitionOnCollision : MonoBehaviour
             LoadCurrentScene();
         }
         
-          if (collider.CompareTag("cot"))
-            {
-                CotManager cotManager = FindObjectOfType<CotManager>();
-            cotManager.OnCotTouched();
+        //  if (collider.CompareTag("cot"))
+        //    {
+        //        CotManager cotManager = FindObjectOfType<CotManager>();
+        //    cotManager.OnCotTouched();
        
-        }
+        //}
 
     }
 

@@ -1,58 +1,50 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class ESC : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-    public GameObject continueButton;
-    public GameObject quitButton;
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button quitButton;
 
     private bool isPaused = false;
 
-    void Start()
+    private void Start()
     {
-        continueButton.SetActive(false);
-        quitButton.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        resumeButton.onClick.AddListener(Resume);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            if (isPaused) Resume();
+            else Pause();
         }
     }
 
-    public void ResumeGame()
+    public void Resume()
     {
-        if (isPaused == true)
-        {
-            continueButton.SetActive(false);
-            quitButton.SetActive(false);
-            Time.timeScale = 1f;
-            isPaused = false;
-        }
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
+    private void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
     }
 
     public void QuitGame()
     {
-        Debug.Log("Thoát game...");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
-        // Nếu chạy trong Unity Editor, dùng dòng sau:
-        // UnityEditor.EditorApplication.isPlaying = false;
-    }
-
-    private void PauseGame()
-    {
-        continueButton.SetActive(true);
-        quitButton.SetActive(true);
-        //Time.timeScale = 0f;
-        isPaused = true;
+#endif
     }
 }
