@@ -28,16 +28,7 @@ public class AttackSystem : MonoBehaviour
         // Kiểm tra nếu đối tượng có HealthSystem
         if (targetHealth != null)
         {
-            // Nếu object này có tag là "Enemy", nó chỉ gây damage cho Player
-            if (gameObject.CompareTag("Enemy") && collision.CompareTag("Player"))
-            {
-                targetHealth.DamageTake(damage);
-            }
-            // Nếu object này có tag khác "Enemy" (ví dụ như "Player"), nó chỉ gây damage cho Enemy
-            else if (!gameObject.CompareTag("Enemy") && collision.CompareTag("Enemy"))
-            {
-                targetHealth.DamageTake(damage);
-            }
+            targetHealth.DamageTake(damage);
         }
     }
 
