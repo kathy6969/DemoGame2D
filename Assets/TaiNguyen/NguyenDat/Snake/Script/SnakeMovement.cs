@@ -11,10 +11,12 @@ public class SnakeMovement : MonoBehaviour
 
     private bool movingRight = true;
     private HealthSystem healthSystem;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
         healthSystem = GetComponent<HealthSystem>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -52,7 +54,7 @@ public class SnakeMovement : MonoBehaviour
     private void Flip()
     {
         movingRight = !movingRight;
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 
     private void OnDrawGizmos()

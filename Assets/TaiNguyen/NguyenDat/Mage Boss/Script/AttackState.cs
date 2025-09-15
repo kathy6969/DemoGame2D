@@ -74,16 +74,15 @@ public class AttackState : State
     {
         if (player != null)
         {
-            float direction = player.position.x - boss.transform.position.x;
-            float scaleX = Mathf.Abs(boss.transform.localScale.x); // Lấy giá trị tuyệt đối để giữ nguyên tỷ lệ gốc
-
-            if (direction > 0)
+            if (player.position.x < boss.transform.position.x)
             {
-                boss.transform.localScale = new Vector3(scaleX, boss.transform.localScale.y, boss.transform.localScale.z);
+                // Người chơi ở bên trái
+                boss.GetComponent<SpriteRenderer>().flipX = true; // Lật sprite sang trái
             }
             else
             {
-                boss.transform.localScale = new Vector3(-scaleX, boss.transform.localScale.y, boss.transform.localScale.z);
+                // Người chơi ở bên phải
+                boss.GetComponent<SpriteRenderer>().flipX = false; // Lật sprite sang phải
             }
         }
     }

@@ -25,7 +25,7 @@ public class Move : MonoBehaviour
         leftBound = startPos.x - moveDistance;
         rightBound = startPos.x + moveDistance;
 
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Lấy SpriteRenderer để lật ảnh
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Lấy SpriteRenderer để lật ảnh
     }
 
     // Update is called once per frame

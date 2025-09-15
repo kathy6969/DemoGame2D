@@ -9,10 +9,12 @@ public class MageAttack : MonoBehaviour
 
     private Transform playerTransform;
     public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -25,13 +27,17 @@ public class MageAttack : MonoBehaviour
 
     private void FacePlayer()
     {
-        if (playerTransform != null)
+        if (playerTransform.position.x < transform.position.x)
         {
-            float directionToPlayer = playerTransform.position.x - transform.position.x;
-            if ((directionToPlayer > 0 && transform.localScale.x < 0) || (directionToPlayer < 0 && transform.localScale.x > 0))
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, 1, 1); // Lật hình khi người chơi đổi hướng
-            }
+            // Người chơi ở bên trái
+            spriteRenderer.flipX = true; // Lật sprite sang trái
+            firePoint.localPosition = new Vector3(-Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, firePoint.localPosition.z);
+        }
+        else
+        {
+            // Người chơi ở bên phải
+            spriteRenderer.flipX = false; // Lật sprite sang phải
+            firePoint.localPosition = new Vector3(Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, firePoint.localPosition.z);
         }
     }
 

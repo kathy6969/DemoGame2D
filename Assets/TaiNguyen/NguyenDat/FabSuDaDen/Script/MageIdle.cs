@@ -13,10 +13,12 @@ public class MageIdle : MonoBehaviour
     private float flipTimer;
     private bool facingRight = true;
     public bool isIdleFlipping = true; // Biến kiểm soát lật hướng
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
         mageAttack = GetComponent<MageAttack>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         flipTimer = idleFlipInterval;
     }
 
@@ -64,7 +66,7 @@ public class MageIdle : MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 
     private void OnDrawGizmos()

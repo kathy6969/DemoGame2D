@@ -11,12 +11,13 @@ public class HomoChase : MonoBehaviour
     private HomoPatrol homoPatrol; // Tham chiếu đến script tuần tra
     private Rigidbody2D rb;
     private Animator animator;
+    public GameObject SpriteObject; // Đối tượng con chứa SpriteRenderer
 
     void Start()
     {
         homoPatrol = GetComponent<HomoPatrol>(); // Lấy tham chiếu đến script tuần tra
         rb = GetComponent<Rigidbody2D>(); // Lấy tham chiếu đến Rigidbody2D
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -64,6 +65,7 @@ public class HomoChase : MonoBehaviour
         }
         else
         {
+            FlipTowardsTarget();
             animator.SetBool("move", false);
             animator.SetBool("atk", true);
         }
@@ -72,10 +74,15 @@ public class HomoChase : MonoBehaviour
     {
         if (player != null)
         {
-            bool shouldFaceRight = player.position.x > transform.position.x;
-            if ((shouldFaceRight && transform.localScale.x < 0) || (!shouldFaceRight && transform.localScale.x > 0))
+            if (player.position.x > transform.position.x)
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                // Người chơi ở bên phải quái
+                SpriteObject.transform.localScale = new Vector3(1f, 1f, 1f); // Quái nhìn về bên phải
+            }
+            else
+            {
+                // Người chơi ở bên trái quái
+                SpriteObject.transform.localScale = new Vector3(-1f, 1f, 1f); // Quái nhìn về bên trái
             }
         }
     }

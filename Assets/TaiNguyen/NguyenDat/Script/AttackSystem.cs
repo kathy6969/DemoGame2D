@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackSystem : MonoBehaviour
 {
     public float damage;
+    public bool isEnemyAttack = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +23,21 @@ public class AttackSystem : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Lấy component HealthSystem của đối tượng bị va chạm
-        HealthSystem targetHealth = collision.GetComponent<HealthSystem>();
-
-        // Kiểm tra nếu đối tượng có HealthSystem
-        if (targetHealth != null)
+        if (isEnemyAttack && collision.CompareTag("Player"))
         {
-            targetHealth.DamageTake(damage);
+            HealthSystem playerHealth = collision.GetComponent<HealthSystem>();
+            if (playerHealth != null)
+            {
+                playerHealth.DamageTake(damage);
+            }
+        }
+        else if (!isEnemyAttack && collision.CompareTag("Enemy"))
+        {
+            HealthSystem enemyHealth = collision.GetComponent<HealthSystem>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.DamageTake(damage);
+            }
         }
     }
 

@@ -5,30 +5,36 @@ using UnityEngine.UI;
 
 public class HomoPatrol : MonoBehaviour
 {
-    public float patrolDistance = 5f; // Khoảng cách di chuyển tối đa từ vị trí ban đầu
-    public float speed = 2f; // Tốc độ di chuyển
-    public float waitTime = 2f; // Thời gian nghỉ khi đến giới hạn
+    public float patrolDistance = 5f;
+    public float speed = 2f;
+    public float waitTime = 2f;
 
     private Vector2 startPosition;
     public bool movingRight = true;
-    private bool isWaiting = false; // Kiểm tra xem quái có đang nghỉ không
+    private bool isWaiting = false;
     private Animator animator;
     private RaycastShooter raycastShooter;
 
-    // Start is called before the first frame update
+    [Header("Sprite Object")]
+    public GameObject spriteObject; // Tham chiếu tới object con chứa sprite
+
     void Start()
     {
-        startPosition = transform.position;// Lưu lại vị trí ban đầu
-        animator = GetComponent<Animator>();
+        startPosition = transform.position;
+        animator = GetComponentInChildren<Animator>();
         raycastShooter = GetComponent<RaycastShooter>();
+        // Nếu chưa gán spriteObject, tự động tìm theo tên
+        if (spriteObject == null)
+        {
+            spriteObject = transform.Find("spriteObject")?.gameObject;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isWaiting)
         {
-            Patrol(); // Chỉ di chuyển khi không ở trạng thái nghỉ
+            Patrol();
             animator.SetBool("move", true);
         }
         else
@@ -40,41 +46,43 @@ public class HomoPatrol : MonoBehaviour
     {
         if (movingRight)
         {
-            transform.position += Vector3.right * speed * Time.deltaTime; // Di chuyển sang phải
+            transform.position += Vector3.right * speed * Time.deltaTime;
             if (transform.position.x >= startPosition.x + patrolDistance)
             {
-                StartCoroutine(WaitAndFlip()); // Bắt đầu nghỉ trước khi đổi hướng
+                StartCoroutine(WaitAndFlip());
             }
         }
         else
         {
-            transform.position += Vector3.left * speed * Time.deltaTime; // Di chuyển sang trái
+            transform.position += Vector3.left * speed * Time.deltaTime;
             if (transform.position.x <= startPosition.x - patrolDistance)
             {
-                StartCoroutine(WaitAndFlip()); // Bắt đầu nghỉ trước khi đổi hướng
+                StartCoroutine(WaitAndFlip());
             }
         }
     }
 
     IEnumerator WaitAndFlip()
     {
-        isWaiting = true; // Đánh dấu quái đang nghỉ
-        yield return new WaitForSeconds(waitTime); // Chờ trong khoảng thời gian đã đặt
-        movingRight = !movingRight; // Đảo hướng di chuyển
-        Flip(); // Đảo hướng hình ảnh
-        isWaiting = false; // Quái tiếp tục di chuyển
+        isWaiting = true;
+        yield return new WaitForSeconds(waitTime);
+        movingRight = !movingRight;
+        Flip();
+        isWaiting = false;
     }
 
     void Flip()
     {
-        // Gọi RaycastShooter để lật hướng ray trước
         if (raycastShooter != null)
         {
             raycastShooter.Flip();
         }
-        // Đảo hướng hình ảnh
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        // Lật hình ảnh bằng cách lật object con spriteObject
+        if (spriteObject != null)
+        {
+            Vector3 scale = spriteObject.transform.localScale;
+            scale.x *= -1;
+            spriteObject.transform.localScale = scale;
+        }
     }
 }

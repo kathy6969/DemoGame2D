@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  isEnemyAttack: 0
 --- !u!114 &634722459341174100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 2
   maxSpeed: 5
-  rayDistance: 0.5
+  rayDistance: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
